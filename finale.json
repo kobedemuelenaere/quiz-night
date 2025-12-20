@@ -1,0 +1,308 @@
+[
+  {
+    "id": 1,
+    "topic": "Wat weet je over Remco Evenepoel?",
+    "answers": [
+      "Wielrenner",
+      "Wereldkampioen",
+      "Soudal Quick-Step",
+      "Aerokogel (van Schepdaal)",
+      "Ouma en Oupa"
+    ]
+  },
+  {
+    "id": 2,
+    "topic": "Wat weet je over Taylor Swift?",
+    "answers": [
+      "Zangeres",
+      "Travis Kelce (Vriend)",
+      "Eras Tour",
+      "Shake It Off (of Cruel Summer)",
+      "Kanye West (Ruzie)"
+    ]
+  },
+  {
+    "id": 3,
+    "topic": "Wat weet je over Conner Rousseau?",
+    "answers": [
+      "Vooruit (SP.A)",
+      "Sint-Niklaas",
+      "Mateke",
+      "King Connah",
+      "Café (Zat/Racisme-incident)"
+    ]
+  },
+  {
+    "id": 4,
+    "topic": "Wat weet je over de Olympische Spelen in Parijs (2024)?",
+    "answers": [
+      "Frankrijk",
+      "Seine (Zwemmen)",
+      "Eiffeltoren",
+      "Remco Evenepoel (2x Goud)",
+      "Breakdance (Nieuwe sport)"
+    ]
+  },
+  {
+    "id": 5,
+    "topic": "Wat weet je over Acid (Nathan Vandergunst)?",
+    "answers": [
+      "YouTuber",
+      "Blankenberge",
+      "Reuzegom (Video)",
+      "Rechtbank (Veroordeeld)",
+      "Sjoemelpoedel"
+    ]
+  },
+  {
+    "id": 6,
+    "topic": "Wat weet je over Pommelien Thijs?",
+    "answers": ["#LikeMe", "Zangeres", "Erop of Eronder", "Knokke Off", "MIA's"]
+  },
+  {
+    "id": 7,
+    "topic": "Wat weet je over Donald Trump?",
+    "answers": [
+      "President VS",
+      "Republikein",
+      "Melania",
+      "Make America Great Again (MAGA)",
+      "Rechtszaken (of Aanslag)"
+    ]
+  },
+  {
+    "id": 8,
+    "topic": "Wat weet je over de serie 'Nonkels'?",
+    "answers": [
+      "West-Vlaams",
+      "Play4",
+      "Kunstgras",
+      "Rik Verheye (Willy)",
+      "Jelle De Beule (Luc)"
+    ]
+  },
+  {
+    "id": 9,
+    "topic": "Wat weet je over Wout van Aert?",
+    "answers": [
+      "Wielrenner (Veldrijder)",
+      "Visma-Lease a Bike (Jumbo)",
+      "Herentals",
+      "Groene Trui",
+      "Mathieu van der Poel (Rivaal)"
+    ]
+  },
+  {
+    "id": 10,
+    "topic": "Vul aan: De vijf Vlaamse provinciehoofdsteden",
+    "answers": ["Brugge", "Gent", "Antwerpen", "Hasselt", "Leuven"]
+  },
+  {
+    "id": 11,
+    "topic": "Wat weet je over Elon Musk?",
+    "answers": [
+      "Tesla",
+      "SpaceX (Raketten)",
+      "X (Twitter)",
+      "Rijkste man ter wereld",
+      "Zuid-Afrika"
+    ]
+  },
+  {
+    "id": 12,
+    "topic": "Wat weet je over K3 (De huidige formatie)?",
+    "answers": [
+      "Hanne",
+      "Marthe",
+      "Julia",
+      "Studio 100",
+      "Haarkleur (Blond, Zwart, Ros)"
+    ]
+  },
+  {
+    "id": 13,
+    "topic": "Wat weet je over de film 'Barbie'?",
+    "answers": [
+      "Margot Robbie",
+      "Ryan Gosling (Ken)",
+      "Roze",
+      "Mattel",
+      "Greta Gerwig (Regisseur)"
+    ]
+  },
+  {
+    "id": 14,
+    "topic": "Wat weet je over Erik Van Looy?",
+    "answers": [
+      "De Slimste Mens",
+      "Regisseur",
+      "Antwerp (Supporter)",
+      "Lach",
+      "Film (Loft/De Zaak Alzheimer)"
+    ]
+  },
+  {
+    "id": 15,
+    "topic": "Wat weet je over Tom Waes?",
+    "answers": [
+      "Reizen Waes",
+      "Kamp Waes",
+      "Undercover",
+      "Dos Cervezas",
+      "Duiker"
+    ]
+  },
+  {
+    "id": 16,
+    "topic": "Welke vijf landen hebben een vaste zetel in de VN-Veiligheidsraad?",
+    "answers": [
+      "Verenigde Staten (VS)",
+      "Rusland",
+      "China",
+      "Frankrijk",
+      "Verenigd Koninkrijk (Engeland)"
+    ]
+  },
+  {
+    "id": 17,
+    "topic": "Wat weet je over Stromae?",
+    "answers": [
+      "Paul Van Haver",
+      "Brussel",
+      "Alors on Danse",
+      "Formidable",
+      "Burn-out (Ziekte)"
+    ]
+  },
+  {
+    "id": 18,
+    "topic": "Wat weet je over Bart De Wever?",
+    "answers": [
+      "N-VA",
+      "Burgemeester Antwerpen",
+      "Latijn",
+      "Vermagerd",
+      "Formateur (Premier-ambities)"
+    ]
+  },
+  {
+    "id": 19,
+    "topic": "Wat weet je over de serie 'Friends'?",
+    "answers": [
+      "New York",
+      "Central Perk (Koffiebar)",
+      "Rachel (of Ross/Monica/Joey...)",
+      "I'll be there for you (Theme song)",
+      "Sitcom"
+    ]
+  },
+  {
+    "id": 20,
+    "topic": "Wat weet je over TikTok?",
+    "answers": [
+      "App",
+      "Chinees (ByteDance)",
+      "Filmpjes (Kort)",
+      "Dansjes",
+      "Scrollen"
+    ]
+  },
+  {
+    "id": 21,
+    "topic": "Wat weet je over Philippe Geubels?",
+    "answers": [
+      "Komiek",
+      "Kaal",
+      "Colruyt",
+      "Stem (Nasaal)",
+      "Jury (Slimste Mens)"
+    ]
+  },
+  {
+    "id": 22,
+    "topic": "Wat zijn de vijf ingrediënten van een klassieke 'Vol-au-vent' (Koninginnehapje)?",
+    "answers": [
+      "Kip",
+      "Champignons",
+      "Gehaktballetjes",
+      "Bladerdeeg (Koekje)",
+      "Witte saus (Room/Bloem)"
+    ]
+  },
+  {
+    "id": 23,
+    "topic": "Wat weet je over Lotte Kopecky?",
+    "answers": [
+      "Wielrenster",
+      "Wereldkampioen",
+      "Belgische",
+      "Piste",
+      "Kristallen Fiets"
+    ]
+  },
+  {
+    "id": 24,
+    "topic": "Wat weet je over de Zillion?",
+    "answers": [
+      "Discotheek",
+      "Antwerpen",
+      "Frank Verstraeten",
+      "Dennis Black Magic",
+      "Film (2022)"
+    ]
+  },
+  {
+    "id": 25,
+    "topic": "Wat weet je over Vladimir Poetin?",
+    "answers": ["Rusland", "President", "Oorlog (Oekraïne)", "KGB", "Kremlin"]
+  },
+  {
+    "id": 26,
+    "topic": "Wat weet je over 'De Verhulstjes'?",
+    "answers": [
+      "Realitysoap",
+      "Gert & Ellen",
+      "Viktor & Marie",
+      "Saint-Tropez (Villa)",
+      "Samson (Hond)"
+    ]
+  },
+  {
+    "id": 27,
+    "topic": "Noem de vijf dwergplaneten in ons zonnestelsel",
+    "answers": ["Pluto", "Ceres", "Eris", "Makemake", "Haumea"]
+  },
+  {
+    "id": 28,
+    "topic": "Wat weet je over James Cooke?",
+    "answers": [
+      "Gert Verhulst (Beste vriend)",
+      "Dorian (Man)",
+      "Boot (Gert Late Night)",
+      "Jani (Vriend)",
+      "Nieuwpoort (Woonplaats)"
+    ]
+  },
+  {
+    "id": 29,
+    "topic": "Wat weet je over Angèle?",
+    "answers": [
+      "Zangeres",
+      "Brussel",
+      "Linkeroog (Broer Romeo Elvis)",
+      "Dua Lipa (Duet)",
+      "Franstalig"
+    ]
+  },
+  {
+    "id": 30,
+    "topic": "Wat weet je over het Vaticaan?",
+    "answers": [
+      "Paus (Franciscus)",
+      "Rome (Enclave)",
+      "Kleinste land ter wereld",
+      "Sint-Pietersplein",
+      "Katholieke Kerk"
+    ]
+  }
+]

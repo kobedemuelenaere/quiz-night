@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "question": "Op het etiket van een Orval zie je een vis met een gouden ring in zijn bek. Over welke specifieke vissoort gaat het?",
+    "answer": "Een forel",
+    "category": "Eten & Drinken"
+  },
+  {
+    "id": 2,
+    "question": "Tik Tok is populair, maar hoe heet de Chinese 'super-app' waarmee Chinezen chatten, betalen, taxi's bestellen en eigenlijk hun hele leven regelen?",
+    "answer": "WeChat",
+    "category": "Technologie"
+  },
+  {
+    "id": 3,
+    "question": "Lachgas wordt steeds vaker als drug gebruikt, maar wat is de correcte scheikundige formule van dit gas?",
+    "answer": "N2O (Distikstofmonoxide)",
+    "category": "Wetenschap"
+  },
+  {
+    "id": 4,
+    "question": "In 1957 stuurden de Russen het eerste levende wezen in een baan om de aarde. Hoe heette dit straathondje?",
+    "answer": "Laika",
+    "category": "Geschiedenis"
+  },
+  {
+    "id": 5,
+    "question": "Wat is de hoofdstad van Australië?",
+    "answer": "Canberra",
+    "category": "Geografie"
+  },
+  {
+    "id": 6,
+    "question": "Ze is momenteel de populairste zangeres van Vlaanderen en won zowat elke MIA die er te winnen viel. We kennen haar van 'Erop of Eronder', maar in welke Ketnet-serie is ze eigenlijk doorgebroken?",
+    "answer": "#LikeMe (Pommelien Thijs)",
+    "category": "Media"
+  },
+  {
+    "id": 7,
+    "question": "Hoeveel harten heeft een octopus?",
+    "answer": "3",
+    "category": "Dierenrijk"
+  },
+  {
+    "id": 8,
+    "question": "In 'Friends' zitten de personages bijna altijd in dezelfde koffiebar. Wat is de naam van die zaak?",
+    "answer": "Central Perk",
+    "category": "TV"
+  },
+  {
+    "id": 9,
+    "question": "Welk wereldberoemd tech-bedrijf begon in de 19e eeuw eigenlijk als fabrikant van rubberlaarzen en papierpulp in Finland, ver voor ze telefoons maakten?",
+    "answer": "Nokia",
+    "category": "Bedrijven"
+  },
+  {
+    "id": 10,
+    "question": "Welke bekende Vlaming is de burgemeester van Middelkerke?",
+    "answer": "Jean-Marie Dedecker",
+    "category": "Politiek"
+  },
+  {
+    "id": 11,
+    "question": "Welk lichaamsdeel is bij de geboorte van een baby nog niet aanwezig, maar ontwikkelt zich pas na een paar maanden (hint: je hebt ze nodig bij 't kruipen)?",
+    "answer": "De knieschijven",
+    "category": "Anatomie"
+  },
+  {
+    "id": 12,
+    "question": "Van welke legendarische band was Dave Grohl de drummer vóór hij de frontman werd van de Foo Fighters?",
+    "answer": "Nirvana",
+    "category": "Muziek"
+  },
+  {
+    "id": 13,
+    "question": "Welk populair speelgoedmerk is eigenlijk de grootste bandenproducent ter wereld (als je kijkt naar het aantal stuks dat ze per jaar maken)?",
+    "answer": "LEGO",
+    "category": "Weetjes"
+  },
+  {
+    "id": 14,
+    "question": "Als je een 'IPA' biertje bestelt, waarvoor staat de afkorting IPA dan?",
+    "answer": "India Pale Ale",
+    "category": "Bierkennis"
+  },
+  {
+    "id": 15,
+    "question": "In welk Afrikaans land kan je de stad Timbuktu vinden?",
+    "answer": "Mali",
+    "category": "Geografie"
+  },
+  {
+    "id": 16,
+    "question": "In de film 'The Matrix' moet Neo kiezen tussen twee pillen. Welke kleur heeft de pil die hem de harde waarheid laat zien en hem uit 'Wonderland' haalt?",
+    "answer": "Rood (De blauwe is om alles te vergeten)",
+    "category": "Film"
+  },
+  {
+    "id": 17,
+    "question": "Welk nummer staat er op de zwarte bal bij biljart (pool)?",
+    "answer": "8",
+    "category": "Sport"
+  },
+  {
+    "id": 18,
+    "question": "Welke populaire VTM-serie, waarin Dirk Porrez 'dedju dedju' zegt, speelt zich af bij een bewakingsfirma?",
+    "answer": "Safety First",
+    "category": "Televisie"
+  },
+  {
+    "id": 19,
+    "question": "Veel mensen denken dat de Caesar Salad genoemd is naar Julius Caesar. Dat is fout. Het is genoemd naar chef Caesar Cardini. In welk land heeft hij deze salade uitgevonden? (Tip: Het is niet Italië en niet de VS).",
+    "answer": "Mexico",
+    "category": "Culinair"
+  },
+  {
+    "id": 20,
+    "question": "Welke vloeistof wordt traditioneel gebruikt in een thermometer om de temperatuur aan te duiden (hoewel nu vaak verboden wegens giftig)?",
+    "answer": "Kwik",
+    "category": "Wetenschap"
+  },
+  {
+    "id": 21,
+    "question": "Welke klassieke wielerklassieker heeft de bijnaam 'De Hel van het Noorden'?",
+    "answer": "Paris-Roubaix",
+    "category": "Sport"
+  },
+  {
+    "id": 22,
+    "question": "In welke West-Vlaamse badstad staat het beroemde kunstwerk 'Searching for Utopia', beter bekend als de gigantische gouden schildpad van Jan Fabre?",
+    "answer": "Nieuwpoort",
+    "category": "Kunst & Kust"
+  },
+  {
+    "id": 23,
+    "question": "Van welk merk is de iPhone de grootste concurrent, en gebruiken ze in Zuid-Korea vooral?",
+    "answer": "Samsung",
+    "category": "Tech"
+  },
+  {
+    "id": 24,
+    "question": "Wie zong in de jaren 80 de hit 'Purple Rain' en veranderde zijn naam ooit in een onuitspreekbaar symbool?",
+    "answer": "Prince",
+    "category": "Muziek"
+  },
+  {
+    "id": 25,
+    "question": "Welke letter komt in de tabel van Mendelejev (periodiek systeem) als enige letter NIET voor?",
+    "answer": "De letter J",
+    "category": "Weetjes"
+  },
+  {
+    "id": 26,
+    "question": "In de film 'Jaws' hebben ze een grotere boot nodig om de haai te vangen. We zoeken de naam van die boot. (Het is ook de naam van een soort walvis).",
+    "answer": "De Orca",
+    "category": "Film"
+  },
+  {
+    "id": 27,
+    "question": "West-Vlaamser wordt het niet: Hoe heet het personage van Rik Verheye in de serie 'Nonkels'? Hij is de baas van een kunstgrasbedrijf.",
+    "answer": "Willy Persyn",
+    "category": "Televisie"
+  },
+  {
+    "id": 28,
+    "question": "Wat is het hoofdingrediënt van de Japanse drank Sake?",
+    "answer": "Rijst",
+    "category": "Drank"
+  },
+  {
+    "id": 29,
+    "question": "Welk land heeft als internetextensie .ch?",
+    "answer": "Zwitserland (Confoederatio Helvetica)",
+    "category": "Algemene Kennis"
+  },
+  {
+    "id": 30,
+    "question": "Zonder in de agenda te kijken: op welke exacte datum trouwt Jonathan?",
+    "answer": "4 Juli",
+    "category": "De Finale Vraag"
+  }
+]

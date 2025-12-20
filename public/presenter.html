@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Night - Presenter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="presenter-screen">
+  <div class="background-pattern"></div>
+  
+  <!-- Setup Phase - Enter Participants -->
+  <div id="setup-screen" class="screen presenter-setup">
+    <div class="setup-card">
+      <h1 class="setup-title">🎮 Quiz Night Setup</h1>
+      
+      <div class="participants-section">
+        <h2>Add Participants</h2>
+        <div class="input-group">
+          <input type="text" id="participant-input" placeholder="Enter name..." maxlength="20">
+          <button id="add-participant-btn" class="btn btn-add">+ Add</button>
+        </div>
+        
+        <ul id="participants-list" class="participants-list"></ul>
+      </div>
+      
+      <button id="start-game-btn" class="btn btn-start" disabled>
+        Start Game
+      </button>
+    </div>
+  </div>
+
+  <!-- Round Intro Phase (Presenter) -->
+  <div id="round-intro-screen" class="screen hidden presenter-round-intro">
+    <div class="round-intro-card">
+      <div class="round-explanation" id="round-explanation">
+        <!-- Explanation HTML will be inserted here -->
+      </div>
+      <button id="start-round-btn" class="btn btn-start">
+        ▶️ Start Round
+      </button>
+    </div>
+  </div>
+
+  <!-- Playing Phase - Presenter Controls -->
+  <div id="playing-screen" class="screen hidden presenter-playing">
+    <div class="presenter-layout">
+      <!-- Left Panel - Question & Answer -->
+      <div class="question-panel">
+        <div class="question-header">
+          <span class="q-number">Q<span id="question-num">1</span>/<span id="total-questions">10</span></span>
+          <span id="points-badge" class="points-badge-presenter">🏆 +20 POINTS</span>
+        </div>
+        
+        <div class="category-display" id="category">Category</div>
+        <h2 class="question-display" id="question">Loading...</h2>
+        
+        <div class="answer-reveal">
+          <span class="answer-label">ANSWER:</span>
+          <span class="answer-text" id="answer">...</span>
+        </div>
+      </div>
+      
+      <!-- Right Panel - Controls -->
+      <div class="control-panel">
+        <div class="current-player-card">
+          <div class="player-label">Current Answerer</div>
+          <div class="player-name" id="current-answerer">No one</div>
+          <div class="buzz-order">
+            <span>Next up:</span>
+            <span id="next-up">-</span>
+          </div>
+        </div>
+        
+        <div class="verdict-buttons">
+          <button id="correct-btn" class="btn btn-correct">
+            ✓ Correct
+          </button>
+          <button id="wrong-btn" class="btn btn-wrong">
+            ✗ Wrong
+          </button>
+        </div>
+        
+        <button id="skip-btn" class="btn btn-skip">
+          Skip Question →
+        </button>
+        
+        <button id="puzzle-round-btn" class="btn btn-puzzle">
+          🧩 Start Puzzelronde
+        </button>
+        
+        <button id="wavelength-round-btn" class="btn btn-wavelength">
+          📻 Start Wavelength
+        </button>
+        
+        <div class="scores-panel">
+          <h3>Scoreboard</h3>
+          <ul id="scoreboard-list" class="presenter-scores"></ul>
+        </div>
+        
+        <button id="reset-btn" class="btn btn-reset">
+          🔄 Reset Game
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Puzzle Phase - Presenter Controls -->
+  <div id="puzzle-screen" class="screen hidden presenter-puzzle">
+    <div class="puzzle-presenter-layout">
+      <!-- Left: Timer and Solutions -->
+      <div class="puzzle-panel">
+        <div class="puzzle-header-presenter">
+          <h2>🧩 Puzzel <span id="puzzle-num">1</span>/<span id="total-puzzles">2</span></h2>
+        </div>
+        
+        <!-- Active Player Timer Display -->
+        <div class="active-player-section">
+          <div class="active-player-card" id="active-player-card">
+            <div class="active-label">NOW PLAYING</div>
+            <div class="active-name" id="active-player-name">-</div>
+            <div class="active-timer" id="active-timer">60</div>
+            <div class="timer-label">seconds</div>
+          </div>
+          
+          <button id="pass-btn" class="btn btn-pass">
+            ⏭️ PASS (Next Player)
+          </button>
+          
+        </div>
+        
+        <!-- Solution buttons -->
+        <div class="solutions-section">
+          <h3>Click when guessed correctly (+20 sec)</h3>
+          <div class="solutions-buttons" id="solutions-buttons">
+            <!-- Generated solutions -->
+          </div>
+        </div>
+        
+        <div class="puzzle-actions">
+          <button id="next-puzzle-btn" class="btn btn-primary">
+            Next Puzzle →
+          </button>
+          <button id="back-to-questions-btn" class="btn btn-secondary">
+            ← Back to Questions
+          </button>
+        </div>
+      </div>
+      
+      <!-- Right: Turn Order and Scores -->
+      <div class="puzzle-control-panel">
+        <div class="turn-order-section">
+          <h3>Turn Order</h3>
+          <ol id="turn-order-list" class="turn-order-list"></ol>
+        </div>
+        
+        <div class="solved-groups-presenter" id="solved-groups-presenter">
+          <h3>✓ Solved</h3>
+          <ul id="solved-list"></ul>
+        </div>
+        
+        <div class="scores-panel">
+          <h3>⏱️ Time Left</h3>
+          <ul id="puzzle-scoreboard-list" class="presenter-scores"></ul>
+        </div>
+        
+        <button id="puzzle-reset-btn" class="btn btn-reset">
+          🔄 Reset Game
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wavelength Phase (Presenter) -->
+  <div id="wavelength-screen" class="screen hidden presenter-wavelength">
+    <div class="wavelength-presenter-layout">
+      <!-- Left: Slider control -->
+      <div class="wavelength-panel">
+        <div class="wavelength-header-presenter">
+          <h2>📻 Wavelength <span id="wl-num">1</span>/<span id="wl-total">6</span></h2>
+        </div>
+        
+        <!-- Current pair info -->
+        <div class="wavelength-pair-info">
+          <div class="pair-box explainer-box">
+            <span class="role-label">UITLEGGER:</span>
+            <span class="role-name" id="presenter-explainer">-</span>
+          </div>
+          <div class="pair-box guesser-box">
+            <span class="role-label">RADER:</span>
+            <span class="role-name" id="presenter-guesser">-</span>
+          </div>
+        </div>
+        
+        <!-- Target indicator as visual slider (only presenter sees) -->
+        <div class="target-indicator">
+          <span class="target-label">🎯 TARGET POSITIE (alleen jij ziet dit!)</span>
+          <div class="target-slider-track">
+            <div class="target-zone-preview zone-miss-left" id="target-miss-left"></div>
+            <div class="target-zone-preview zone-close-left" id="target-close-left"></div>
+            <div class="target-zone-preview zone-bullseye" id="target-bullseye"></div>
+            <div class="target-zone-preview zone-close-right" id="target-close-right"></div>
+            <div class="target-zone-preview zone-miss-right" id="target-miss-right"></div>
+            <div class="target-marker" id="target-marker"></div>
+          </div>
+        </div>
+        
+        <!-- Slider labels -->
+        <div class="presenter-slider-labels">
+          <span id="presenter-label-left">Links</span>
+          <span class="presenter-category" id="presenter-category">Categorie</span>
+          <span id="presenter-label-right">Rechts</span>
+        </div>
+        
+        <!-- Slider control -->
+        <div class="presenter-slider-container">
+          <input type="range" id="wavelength-slider" min="0" max="100" value="50" class="wavelength-input">
+          <div class="slider-value" id="slider-value">50</div>
+        </div>
+        
+        <!-- Action buttons -->
+        <div class="wavelength-actions">
+          <button id="reveal-btn" class="btn btn-reveal">
+            ⏎ REVEAL
+          </button>
+          <button id="next-wavelength-btn" class="btn btn-primary hidden">
+            Volgende →
+          </button>
+        </div>
+        
+        <!-- Result display -->
+        <div class="presenter-result hidden" id="presenter-result">
+          <div class="result-score" id="presenter-result-score">🎯 BULLSEYE!</div>
+          <div class="result-detail" id="presenter-result-detail">+30 sec voor beide spelers!</div>
+        </div>
+      </div>
+      
+      <!-- Right: Pairs rotation & Scores -->
+      <div class="wavelength-control-panel">
+        <div class="pairs-section">
+          <h3>📋 Duo's Rotatie</h3>
+          <ol id="pairs-list" class="pairs-list"></ol>
+        </div>
+        
+        <div class="scores-panel">
+          <h3>⏱️ Scores</h3>
+          <ul id="wl-scoreboard-list" class="presenter-scores"></ul>
+        </div>
+        
+        <button id="wl-reset-btn" class="btn btn-reset">
+          🔄 Reset Game
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Finale Phase (Presenter) -->
+  <div id="finale-screen" class="screen hidden presenter-finale">
+    <div class="finale-presenter-layout">
+      <!-- Left: Topic and Answer controls -->
+      <div class="finale-panel">
+        <div class="finale-header-presenter">
+          <h2>🏆 FINALE <span id="finale-num">1</span>/<span id="finale-total">5</span></h2>
+        </div>
+        
+        <!-- Current player timer -->
+        <div class="finale-active-player">
+          <div class="active-label">AAN DE BEURT</div>
+          <div class="finale-active-name" id="finale-active-name">-</div>
+          <div class="finale-active-timer" id="finale-active-timer">60</div>
+          <div class="timer-label">seconden</div>
+        </div>
+        
+        <!-- Topic display -->
+        <div class="finale-topic-presenter">
+          <h3>📋 ONDERWERP:</h3>
+          <div class="topic-display" id="presenter-finale-topic">Loading...</div>
+        </div>
+        
+        <!-- Answer buttons -->
+        <div class="finale-answers-section">
+          <h3>Antwoorden (klik bij correct = -20 sec van tegenstander)</h3>
+          <div class="finale-answer-buttons" id="finale-answer-buttons">
+            <!-- Answer buttons generated by JS -->
+          </div>
+        </div>
+        
+        <!-- Pass button -->
+        <button id="finale-pass-btn" class="btn btn-pass">
+          ⏭️ PASS (Wissel speler)
+        </button>
+        
+        <!-- Pause button -->
+        <button id="finale-pause-btn" class="btn btn-secondary">
+          ⏸️ PAUZE
+        </button>
+        
+        <!-- Reveal answers button -->
+        <button id="finale-reveal-btn" class="btn btn-reveal">
+          👁️ Toon Antwoorden
+        </button>
+        
+        <!-- Next topic -->
+        <button id="next-topic-btn" class="btn btn-primary">
+          Volgend Onderwerp →
+        </button>
+      </div>
+      
+      <!-- Right: Scores panel -->
+      <div class="finale-control-panel">
+        <div class="finalists-scores">
+          <h3>🏆 Finalisten</h3>
+          <div class="finalist-score-card" id="finalist-card-1">
+            <div class="finalist-card-name" id="fc-name-1">Player 1</div>
+            <div class="finalist-card-time" id="fc-time-1">60</div>
+            <div class="finalist-card-label">sec</div>
+          </div>
+          <div class="finalist-score-card" id="finalist-card-2">
+            <div class="finalist-card-name" id="fc-name-2">Player 2</div>
+            <div class="finalist-card-time" id="fc-time-2">60</div>
+            <div class="finalist-card-label">sec</div>
+          </div>
+        </div>
+        
+        <div class="finale-progress-section">
+          <h3>✓ Gevonden (<span id="found-count">0</span>/5)</h3>
+          <ul id="found-answers-list" class="found-answers-list"></ul>
+        </div>
+        
+        <button id="finale-reset-btn" class="btn btn-reset">
+          🔄 Reset Game
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Finished Phase -->
+  <div id="finished-screen" class="screen hidden presenter-finished">
+    <div class="finished-card">
+      <h1 id="finished-title">🎉 Game Complete!</h1>
+      <div class="winner-display" id="winner-display"></div>
+      
+      <div class="final-results">
+        <h2>Final Rankings</h2>
+        <ol id="final-scoreboard" class="final-rankings"></ol>
+      </div>
+      
+      <button id="new-game-btn" class="btn btn-start">
+        Start New Game
+      </button>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="presenter.js"></script>
+</body>
+</html>

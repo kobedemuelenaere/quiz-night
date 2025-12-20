@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "solutions": ["EIGEN KWEEK", "PADEL", "CAMILLE"],
+    "grid": [
+      { "clue": "CANNABIS", "solution": "EIGEN KWEEK" },
+      { "clue": "GLAZEN KOOI", "solution": "PADEL" },
+      { "clue": "VUURWERK", "solution": "CAMILLE" },
+      { "clue": "FRANK & JULITA", "solution": "EIGEN KWEEK" },
+      { "clue": "RACKET", "solution": "PADEL" },
+      { "clue": "WEST-VLAAMSE POPSTER", "solution": "CAMILLE" },
+      { "clue": "SHIT OF MOUSE", "solution": "EIGEN KWEEK" },
+      { "clue": "HYPE SPORT", "solution": "PADEL" },
+      { "clue": "#LIKEME", "solution": "CAMILLE" },
+      { "clue": "NONKELS (PREQUEL)", "solution": "EIGEN KWEEK" },
+      { "clue": "NIET TENNIS", "solution": "PADEL" },
+      { "clue": "LOTTO ARENA", "solution": "CAMILLE" }
+    ]
+  },
+  {
+    "id": 2,
+    "solutions": ["BARBIE", "CHATGPT", "VINTED"],
+    "grid": [
+      { "clue": "MARGOT ROBBIE", "solution": "BARBIE" },
+      { "clue": "ARTIFICIËLE INTELLIGENTIE", "solution": "CHATGPT" },
+      { "clue": "TWEEDEHANDS KLEDIJ", "solution": "VINTED" },
+      { "clue": "KEN", "solution": "BARBIE" },
+      { "clue": "HUISWERK MAKEN", "solution": "CHATGPT" },
+      { "clue": "DON'T WEAR IT? SELL IT!", "solution": "VINTED" },
+      { "clue": "MATTEL", "solution": "BARBIE" },
+      { "clue": "OPENAI", "solution": "CHATGPT" },
+      { "clue": "PAKKETJES VERSTUREN", "solution": "VINTED" },
+      { "clue": "ROZE", "solution": "BARBIE" },
+      { "clue": "TAALMODEL", "solution": "CHATGPT" },
+      { "clue": "APP", "solution": "VINTED" }
+    ]
+  },
+  {
+    "id": 3,
+    "solutions": ["IKEA", "DE MOL", "TOMORROWLAND"],
+    "grid": [
+      { "clue": "ZWEEDSE BALLETJES", "solution": "IKEA" },
+      { "clue": "GILLES DE COSTER", "solution": "DE MOL" },
+      { "clue": "DE SCHORRE", "solution": "TOMORROWLAND" },
+      { "clue": "BILLY BOEKENKAST", "solution": "IKEA" },
+      { "clue": "SABOTEUR", "solution": "DE MOL" },
+      { "clue": "BOOM", "solution": "TOMORROWLAND" },
+      { "clue": "INBUSSLEUTEL", "solution": "IKEA" },
+      { "clue": "PASVRAGEN", "solution": "DE MOL" },
+      { "clue": "DIMITRI VEGAS & LIKE MIKE", "solution": "TOMORROWLAND" },
+      { "clue": "BLAUW EN GEEL", "solution": "IKEA" },
+      { "clue": "NIEMAND TE VERTROUWEN", "solution": "DE MOL" },
+      { "clue": "MAINSTAGE", "solution": "TOMORROWLAND" }
+    ]
+  },
+  {
+    "id": 4,
+    "solutions": ["GERNAALKROKET", "JAMES COOKE", "DE KOERS"],
+    "grid": [
+      { "clue": "GRIJZE GARNAAL", "solution": "GERNAALKROKET" },
+      { "clue": "GERT VERHULST", "solution": "JAMES COOKE" },
+      { "clue": "HOOGMIS", "solution": "DE KOERS" },
+      { "clue": "OOSTENDE", "solution": "GERNAALKROKET" },
+      { "clue": "DORIAN", "solution": "JAMES COOKE" },
+      { "clue": "PELOTON", "solution": "DE KOERS" },
+      { "clue": "GEFRITUURD", "solution": "GERNAALKROKET" },
+      { "clue": "DE SLIMSTE MENS", "solution": "JAMES COOKE" },
+      { "clue": "MICHEL WUYTS", "solution": "DE KOERS" },
+      { "clue": "CITROENTJE ERBIJ", "solution": "GERNAALKROKET" },
+      { "clue": "DE MUSICAL", "solution": "JAMES COOKE" },
+      { "clue": "KASSEIEN", "solution": "DE KOERS" }
+    ]
+  },
+  {
+    "id": 5,
+    "solutions": ["POKÉMON", "AIRFRYER", "DE RODE DUIVELS"],
+    "grid": [
+      { "clue": "PIKACHU", "solution": "POKÉMON" },
+      { "clue": "HETE LUCHT", "solution": "AIRFRYER" },
+      { "clue": "KEVIN DE BRUYNE", "solution": "DE RODE DUIVELS" },
+      { "clue": "GOTTA CATCH 'EM ALL", "solution": "POKÉMON" },
+      { "clue": "GEEN FRITUURVET", "solution": "AIRFRYER" },
+      { "clue": "GOUDEN GENERATIE", "solution": "DE RODE DUIVELS" },
+      { "clue": "NINTENDO", "solution": "POKÉMON" },
+      { "clue": "KROKETJES", "solution": "AIRFRYER" },
+      { "clue": "WK & EK", "solution": "DE RODE DUIVELS" },
+      { "clue": "CHARIZARD", "solution": "POKÉMON" },
+      { "clue": "KEUKENTOESTEL", "solution": "AIRFRYER" },
+      { "clue": "ROMELU LUKAKU", "solution": "DE RODE DUIVELS" }
+    ]
+  },
+  {
+    "id": 6,
+    "solutions": ["FC DE KAMPIOENEN", "ABBA", "GIN TONIC"],
+    "grid": [
+      { "clue": "DAGSCHOTEL", "solution": "FC DE KAMPIOENEN" },
+      { "clue": "DANCING QUEEN", "solution": "ABBA" },
+      { "clue": "COCKTAIL", "solution": "GIN TONIC" },
+      { "clue": "BALTHASAR BOMA", "solution": "FC DE KAMPIOENEN" },
+      { "clue": "ZWEDEN", "solution": "ABBA" },
+      { "clue": "HENDRICK'S", "solution": "GIN TONIC" },
+      { "clue": "MARCSKE", "solution": "FC DE KAMPIOENEN" },
+      { "clue": "WATERLOO", "solution": "ABBA" },
+      { "clue": "KOMKOMMER", "solution": "GIN TONIC" },
+      { "clue": "ZAL 'T GAAN JA", "solution": "FC DE KAMPIOENEN" },
+      { "clue": "MAMMA MIA", "solution": "ABBA" },
+      { "clue": "SCHWEPPES", "solution": "GIN TONIC" }
+    ]
+  }
+]

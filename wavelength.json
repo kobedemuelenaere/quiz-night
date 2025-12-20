@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "left": "Afknapper",
+    "right": "Sexy",
+    "category": "Hobby's"
+  },
+  {
+    "id": 2,
+    "left": "Vies / Goor",
+    "right": "Heerlijk",
+    "category": "Pizza toppings"
+  },
+  {
+    "id": 3,
+    "left": "Irritant",
+    "right": "Sympathiek",
+    "category": "Bekende Vlamingen"
+  },
+  {
+    "id": 4,
+    "left": "Creepy / Slecht idee",
+    "right": "Romantisch / Perfect",
+    "category": "Locatie voor een eerste date"
+  },
+  {
+    "id": 5,
+    "left": "Saai / Normaal",
+    "right": "Schokkend / Raar",
+    "category": "Dingen die je in iemands nachtkastje vindt"
+  },
+  {
+    "id": 6,
+    "left": "Nutteloos",
+    "right": "Onmisbaar",
+    "category": "Keukentoestellen"
+  }
+]
