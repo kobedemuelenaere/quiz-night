@@ -34,8 +34,6 @@ const wavelengthScoreboardList = document.getElementById('wavelength-scoreboard-
 const questionNum = document.getElementById('question-num');
 const totalQuestions = document.getElementById('total-questions');
 const pointsIndicator = document.getElementById('points-indicator');
-const category = document.getElementById('category');
-const question = document.getElementById('question');
 const currentAnswerer = document.getElementById('current-answerer');
 const scoreboardList = document.getElementById('scoreboard-list');
 
@@ -210,11 +208,6 @@ function updatePlayingScreen(state) {
     pointsIndicator.classList.add('active');
   } else {
     pointsIndicator.classList.remove('active');
-  }
-  
-  if (state.currentQuestion) {
-    category.textContent = state.currentQuestion.category || '';
-    question.textContent = state.currentQuestion.question;
   }
   
   if (state.currentAnswerer) {
