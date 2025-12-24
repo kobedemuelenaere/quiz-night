@@ -359,6 +359,12 @@ function updateRoundIntroScreen(state) {
   if (!state.roundInfo || !roundExplanation) return;
   
   roundExplanation.innerHTML = state.roundInfo.explanationPresenter;
+  
+  // Update scoreboard
+  const presenterRoundIntroScoreboardList = document.getElementById('presenter-round-intro-scoreboard-list');
+  if (presenterRoundIntroScoreboardList) {
+    updateScoreboard(state.scores, presenterRoundIntroScoreboardList, true, true);
+  }
 }
 
 function updatePlayingScreen(state) {
@@ -805,6 +811,12 @@ function updateFinalePresenterScreen(state) {
     } else {
       foundAnswersList.innerHTML = '<li class="empty">Nog geen antwoorden gevonden</li>';
     }
+  }
+  
+  // All scores
+  const presenterFinaleAllScores = document.getElementById('presenter-finale-all-scores');
+  if (presenterFinaleAllScores) {
+    updateScoreboard(state.scores, presenterFinaleAllScores, true, true);
   }
 }
 

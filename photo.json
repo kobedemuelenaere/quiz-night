@@ -1,17 +1,5 @@
 [
   {
-    "id": "hondenrassen",
-    "theme": "Hondenrassen",
-    "photos": [
-      { "file": "Bulldog.jpg", "answer": "Bulldog" },
-      { "file": "cockerspaniel.jpg", "answer": "Cocker Spaniel" },
-      { "file": "goldenretriever.jpg", "answer": "Golden Retriever" },
-      { "file": "malinois.jpg", "answer": "Mechelse Herder / Malinois" },
-      { "file": "poedel.jpg", "answer": "Poedel" },
-      { "file": "weimaraner.webp", "answer": "Weimaraner" }
-    ]
-  },
-  {
     "id": "politici",
     "theme": "Belgische Politici",
     "photos": [
@@ -51,6 +39,18 @@
     ]
   },
   {
+    "id": "hondenrassen",
+    "theme": "Hondenrassen",
+    "photos": [
+      { "file": "Bulldog.jpg", "answer": "Bulldog" },
+      { "file": "cockerspaniel.jpg", "answer": "Cocker Spaniel" },
+      { "file": "goldenretriever.jpg", "answer": "Golden Retriever" },
+      { "file": "malinois.jpg", "answer": "Mechelse Herder / Malinois" },
+      { "file": "poedel.jpg", "answer": "Poedel" },
+      { "file": "weimaraner.webp", "answer": "Weimaraner" }
+    ]
+  },
+  {
     "id": "steden",
     "theme": "Steden",
     "photos": [
@@ -75,18 +75,6 @@
     ]
   },
   {
-    "id": "seizoenmannen",
-    "theme": "???-mannen",
-    "photos": [
-      { "file": "herfstman.jpeg", "answer": "Herfstman (Clouseau)" },
-      { "file": "kersman.jpeg", "answer": "Kersman / Kerstman" },
-      { "file": "korstman.jpeg", "answer": "Korstman (Korstmos)" },
-      { "file": "persman.jpeg", "answer": "Persman" },
-      { "file": "petman.jpeg", "answer": "Petman (Robot)" },
-      { "file": "vestman.jpeg", "answer": "Vestman (IJsland)" }
-    ]
-  },
-  {
     "id": "adressen",
     "theme": "Adressen",
     "photos": [
@@ -96,6 +84,18 @@
       { "file": "vlasbloemstraat.png", "answer": "Vlasbloemstraat" },
       { "file": "Nieuwpoort.png", "answer": "Nieuwpoort" },
       { "file": "theodoorsevens.png", "answer": "Theodoor Sevenslaan" }
+    ]
+  },
+  {
+    "id": "seizoenmannen",
+    "theme": "???-mannen",
+    "photos": [
+      { "file": "herfstman.jpeg", "answer": "Herfstman (Clouseau)" },
+      { "file": "kersman.jpeg", "answer": "Kersman / Kerstman" },
+      { "file": "korstman.jpeg", "answer": "Korstman (Korstmos)" },
+      { "file": "persman.jpeg", "answer": "Persman" },
+      { "file": "petman.jpeg", "answer": "Petman (Robot)" },
+      { "file": "vestman.jpeg", "answer": "Vestman (IJsland)" }
     ]
   }
 ]

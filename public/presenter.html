@@ -42,6 +42,10 @@
       <button id="start-round-btn" class="btn btn-start">
         ▶️ Start Round
       </button>
+      <div class="scores-panel round-intro-scores">
+        <h3>⏱️ Scores</h3>
+        <ul id="presenter-round-intro-scoreboard-list" class="presenter-scores"></ul>
+      </div>
     </div>
   </div>
 
@@ -424,6 +428,11 @@
         <div class="finale-progress-section">
           <h3>✓ Gevonden (<span id="found-count">0</span>/5)</h3>
           <ul id="found-answers-list" class="found-answers-list"></ul>
+        </div>
+        
+        <div class="scores-panel">
+          <h3>⏱️ Alle Scores</h3>
+          <ul id="presenter-finale-all-scores" class="presenter-scores"></ul>
         </div>
         
         <button id="finale-reset-btn" class="btn btn-reset">
