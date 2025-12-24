@@ -812,12 +812,6 @@ function updateFinalePresenterScreen(state) {
       foundAnswersList.innerHTML = '<li class="empty">Nog geen antwoorden gevonden</li>';
     }
   }
-  
-  // All scores
-  const presenterFinaleAllScores = document.getElementById('presenter-finale-all-scores');
-  if (presenterFinaleAllScores) {
-    updateScoreboard(state.scores, presenterFinaleAllScores, true, true);
-  }
 }
 
 function updateFinishedScreen(state) {

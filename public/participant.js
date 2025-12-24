@@ -115,12 +115,6 @@ function updateRoundIntroScreen(state) {
     const icons = { questions: '🎯', puzzle: '🧩', wavelength: '📻', photo: '📸', finale: '🏆' };
     roundIcon.textContent = icons[state.currentRound] || '🎮';
   }
-  
-  // Update scoreboard
-  const roundIntroScoreboardList = document.getElementById('round-intro-scoreboard-list');
-  if (roundIntroScoreboardList) {
-    updateScoreboard(state.scores, roundIntroScoreboardList, true, true);
-  }
 }
 
 function updatePhotoScreen(state) {
@@ -461,12 +455,6 @@ function updateFinaleScreen(state) {
   }
   
   // Don't show paused indicator on player screen
-  
-  // All scores
-  const finaleScoreboardList = document.getElementById('finale-scoreboard-list');
-  if (finaleScoreboardList) {
-    updateScoreboard(state.scores, finaleScoreboardList, true, true);
-  }
 }
 
 function updateFinishedScreen(state) {

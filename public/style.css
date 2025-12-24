@@ -3165,26 +3165,11 @@ body {
   color: var(--text-muted);
 }
 
-/* Round Intro Scoreboard */
-.round-intro-scoreboard {
-  position: absolute;
-  right: 2rem;
-  bottom: 2rem;
-  width: 280px;
-}
-
+/* Round Intro Scores (Presenter) */
 .round-intro-scores {
   margin-top: 2rem;
   max-height: 300px;
   overflow-y: auto;
-}
-
-/* Finale All Scores */
-.finale-all-scores {
-  position: absolute;
-  right: 2rem;
-  bottom: 2rem;
-  width: 280px;
 }
 
 /* Photo Adding Section */
