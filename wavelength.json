@@ -7,8 +7,8 @@
   },
   {
     "id": 2,
-    "left": "Vies / Goor",
-    "right": "Heerlijk",
+    "left": "Vies",
+    "right": "Lekker",
     "category": "Pizza toppings"
   },
   {
@@ -19,18 +19,24 @@
   },
   {
     "id": 4,
-    "left": "Creepy / Slecht idee",
-    "right": "Romantisch / Perfect",
+    "left": "Slecht idee",
+    "right": "Goed idee",
     "category": "Locatie voor een eerste date"
   },
   {
     "id": 5,
-    "left": "Saai / Normaal",
-    "right": "Schokkend / Raar",
+    "left": "Normaal",
+    "right": "Raar",
     "category": "Dingen die je in iemands nachtkastje vindt"
   },
   {
     "id": 6,
+    "left": "Saai",
+    "right": "Zorgwekkend",
+    "category": "Iemands laatste Google zoekopdracht"
+  },
+  {
+    "id": 7,
     "left": "Nutteloos",
     "right": "Onmisbaar",
     "category": "Keukentoestellen"

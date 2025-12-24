@@ -163,6 +163,48 @@
     </aside>
   </div>
 
+  <!-- Photo Phase -->
+  <div id="photo-screen" class="screen hidden">
+    <header class="photo-header">
+      <h1 class="photo-title">📸 FOTORONDE</h1>
+      <div class="photo-counter">
+        Foto <span id="photo-num">1</span>/6
+      </div>
+    </header>
+
+    <!-- Active Player with Timer -->
+    <section class="photo-player-section">
+      <div class="photo-player-display">
+        <div class="photo-player-name" id="photo-player-name">Speler</div>
+        <div class="photo-player-time" id="photo-player-time">60</div>
+        <div class="photo-player-label">seconden</div>
+      </div>
+    </section>
+
+    <!-- Photo display area -->
+    <main class="photo-display-area">
+      <div class="photo-container" id="photo-container">
+        <img id="current-photo-img" src="" alt="Quiz foto" class="quiz-photo">
+      </div>
+    </main>
+
+    <!-- Phase indicator -->
+    <div class="photo-phase-indicator" id="photo-phase-indicator">
+      <!-- Will show current phase: playing, supplement, review -->
+    </div>
+
+    <!-- Supplement info -->
+    <div class="photo-supplement-info hidden" id="photo-supplement-info">
+      <div class="supplement-label">AANVULLEN:</div>
+      <div class="supplement-player-name" id="supplement-player-name">-</div>
+    </div>
+
+    <!-- All players time -->
+    <aside class="photo-all-times">
+      <ul id="photo-scoreboard-list" class="time-list"></ul>
+    </aside>
+  </div>
+
   <!-- Finale Phase -->
   <div id="finale-screen" class="screen hidden">
     <header class="finale-header">

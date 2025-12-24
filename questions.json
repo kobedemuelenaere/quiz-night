@@ -1,187 +1,182 @@
 [
   {
     "id": 1,
-    "question": "Welk merk fiets heeft Jef recent gekocht?",
-    "answer": "Giant",
-    "category": "Vrienden & Weetjes"
+    "question": "Vijftien jaar lang konden ze elkaars bloed wel drinken, maar in 2025 gebeurde het mirakel dan toch. Welke legendarische Britse broers begroeven de strijdbijl en kondigden een grote reünietournee aan?",
+    "answer": "Oasis (Liam & Noel Gallagher)",
+    "category": "Muziek"
   },
   {
     "id": 2,
-    "question": "Welke Nederlandse artiest ging viral met het nummer 'Europapa', de inzending voor het Eurovisiesongfestival?",
-    "answer": "Joost Klein",
-    "category": "Muziek & Actua"
+    "question": "Elon Musk leidt sinds 2025 een nieuw departement om de Amerikaanse overheid efficiënter te maken. De afkorting verwijst knipoog-gewijs naar een cryptomunt. Wat is de naam van dit departement?",
+    "answer": "DOGE",
+    "category": "Tech & Politiek"
   },
   {
     "id": 3,
-    "question": "De bioscopen kleurden tijdens de 'Barbenheimer'-zomer helemaal roze. Hoe heette de mannelijke tegenspeler van Margot Robbie in de film 'Barbie'?",
+    "question": "Tijdens de 'Barbenheimer'-zomer kleurde de bioscopen roze. Hoe heette de mannelijke tegenspeler van Margot Robbie in de film 'Barbie'?",
     "answer": "Ryan Gosling (Ken)",
     "category": "Film"
   },
   {
     "id": 4,
+    "question": "Hij leek dé geknipte kandidaat voor 'De Verraders', maar werd in het najaar van 2025 uit het spel gezet nog voor de opnames goed en wel begonnen waren. Over welke sportjournalist gaat het?",
+    "answer": "Ruben Van Gucht",
+    "category": "Media & Schandaal"
+  },
+  {
+    "id": 5,
+    "question": "Ruben Van Gucht moest 'De Verraders' verlaten omdat hij de regels schond. Hij smokkelde verboden voorwerpen zijn hotelkamer in. Een gsm wordt vaak genoemd, maar over welke twee andere elektronische apparaten ging het officieel?",
+    "answer": "Een laptop en een smartwatch",
+    "category": "TV & Weetjes"
+  },
+  {
+    "id": 6,
+    "question": "Chinese automerken zoals BYD zien we steeds vaker op de weg. Waarvoor staat de afkorting BYD?",
+    "answer": "Build Your Dreams",
+    "category": "Auto's"
+  },
+  {
+    "id": 7,
+    "question": "We kennen Louise allemaal als het rijke meisje uit de hitserie 'Knokke Off'. Welke veelzijdige Vlaamse zangeres en actrice vertolkt deze rol?",
+    "answer": "Pommelien Thijs",
+    "category": "Series"
+  },
+  {
+    "id": 8,
+    "question": "Na een zwaar 2024 maakte Tom Waes eind 2025 zijn comeback als acteur. Hij speelt het hoofdpersonage Vince in een nieuwe fictiereeks op VRT 1. Hoe heet deze reeks?",
+    "answer": "Badgast",
+    "category": "Series"
+  },
+  {
+    "id": 9,
     "question": "Wat is het huidige gewicht van Kobe? (Je mag er 1 kg naast zitten).",
     "answer": "78 kg",
     "category": "De Kobe Vraag"
   },
   {
-    "id": 5,
+    "id": 10,
+    "question": "Welk politiek debatprogramma van de VRT wordt al sinds 1988 elke zondag om 11 uur uitgezonden?",
+    "answer": "De Zevende Dag",
+    "category": "Media"
+  },
+  {
+    "id": 11,
+    "question": "Welke Nederlandse artiest, bekend van zijn blauwe pak met schoudervullingen, werd in november 2025 aangekondigd als nieuwe coach in 'The Voice van Vlaanderen'?",
+    "answer": "Joost Klein",
+    "category": "TV & Muziek"
+  },
+  {
+    "id": 12,
+    "question": "Welk merk fiets heeft Jef recent gekocht?",
+    "answer": "Giant",
+    "category": "Vrienden & Weetjes"
+  },
+  {
+    "id": 13,
     "question": "In welk land betaal je met de Zloty?",
     "answer": "Polen",
     "category": "Reizen"
   },
   {
-    "id": 6,
+    "id": 14,
+    "question": "Wat is de naam van de AI-chatbot van Google die de concurrentie aangaat met ChatGPT (voorheen bekend als Bard)?",
+    "answer": "Gemini",
+    "category": "Tech"
+  },
+  {
+    "id": 15,
+    "question": "Welk land werd in de zomer van 2024 Europees Kampioen voetbal bij de mannen?",
+    "answer": "Spanje",
+    "category": "Voetbal"
+  },
+  {
+    "id": 16,
+    "question": "Een zatte avond in Sint-Niklaas en een uitspraak over een matrak kostten hem bijna zijn carrière, maar hij maakte daarna een electorale comeback. Over welke politicus hebben we het?",
+    "answer": "Conner Rousseau",
+    "category": "Politiek"
+  },
+  {
+    "id": 17,
     "question": "Welke drank is het hoofdingrediënt van een 'Espresso Martini', naast espresso en koffielikeur?",
     "answer": "Vodka",
     "category": "Cocktails"
   },
   {
-    "id": 7,
-    "question": "Welke Britse band kondigde na 15 jaar ruzie eindelijk hun reünie aan voor een tour in 2025, wat leidde tot enorme chaos bij de ticketverkoop?",
-    "answer": "Oasis (Liam & Noel Gallagher)",
-    "category": "Muziek"
+    "id": 18,
+    "question": "Hoe noemde Donald Trump de dag van 2 april 2025 waarop hij zijn nieuwe tarieven aankondigde?",
+    "answer": "Liberation Day",
+    "category": "Politiek & Economie"
   },
   {
-    "id": 8,
-    "question": "In 2024 ging een bepaalde chocoladereep met pistachecrème en knafeh viraal op TikTok. Iedereen moest en zou deze 'reep' proeven. Naar welke stad is deze reep vernoemd?",
-    "answer": "Dubai (De Dubai-reep)",
-    "category": "Food Trends"
+    "id": 19,
+    "question": "Nadat Papa het verklapte in WhatsApp wisten we wellicht allemaal dat Felix de Slimste Mens ter Wereld was. Maar wie zelf keek weet ook wie tweede was?",
+    "answer": "Roel Steeno",
+    "category": "TV"
   },
   {
-    "id": 9,
-    "question": "Op de Olympische Spelen in Parijs (2024) pakte één Belgische mannelijke wielrenner twee gouden medailles (tijdrit en wegrit). Wie is deze 'Aerokogel'?",
-    "answer": "Remco Evenepoel",
-    "category": "Sport"
+    "id": 20,
+    "question": "Welke zanger en acteur werd bekend als 'The King of Rock and Roll' en had hits als 'Jailhouse Rock'?",
+    "answer": "Elvis Presley",
+    "category": "Muziek Klassiekers"
   },
   {
-    "id": 10,
-    "question": "Welke zangeres domineerde de zomer van 2024 met haar limoengroene albumcover en de term 'Brat Summer'?",
-    "answer": "Charli XCX",
-    "category": "Popcultuur"
+    "id": 21,
+    "question": "Het voelde als het einde van een tijdperk. Vlak voor de finale in december 2025 kondigde hij aan dat hij stopt als jurylid bij 'De Slimste Mens ter Wereld'. Over wie gaat het?",
+    "answer": "Herman Brusselmans",
+    "category": "TV"
   },
   {
-    "id": 11,
-    "question": "Hoe heet de immens populaire app uit China waar je goedkope troep kan kopen en die in 2024 Amazon het vuur aan de schenen legde (denk aan de oranje reclames)?",
+    "id": 22,
+    "question": "Met de slogan 'Shop like a billionaire' en agressieve oranje reclames legt deze Chinese app Amazon het vuur aan de schenen. Hoe heet de app?",
     "answer": "Temu",
     "category": "Economie & Tech"
   },
   {
-    "id": 12,
-    "question": "In 'De Mol' 2024 speelde hij de saboteur. Hij was de eerste Mol ooit die halverwege het spel zelf opgaf omdat het mentaal te zwaar werd. Wat was zijn voornaam?",
-    "answer": "Senne (Strikvraag: Senne was de winnaar! De mol die opgaf was Philippe in een vorig seizoen, maar in 2024 was Senne de winnaar en Bernard de Mol. Vraag herformuleren: Wie was de Mol in 2024?) -> Antwoord: Bernard.",
-    "answer": "Bernard",
-    "category": "Televisie"
+    "id": 23,
+    "question": "Hoeveel sterren staan er op de vlag van de Europese Unie?",
+    "answer": "12",
+    "category": "Kennis"
   },
   {
-    "id": 13,
-    "question": "Welk automerk heeft als logo vier in elkaar grijpende ringen?",
-    "answer": "Audi",
-    "category": "Auto's"
+    "id": 24,
+    "question": "Welke auto bestuurde Tom Waes tijdens zijn ernstig auto-ongeluk eind november 2024 bij de Kennedytunnel in Antwerpen?",
+    "answer": "Porsche",
+    "category": "TV & Actua"
   },
   {
-    "id": 14,
-    "question": "Erik Van Looy zoekt elk jaar 'De Slimste Mens', maar welk ander presentatieduo nam in 2024 de fakkel over van 'De Slimste Mens ter Wereld' voor een speciale editie, of werd althans vaak genoemd als opvolgers?",
-    "answer": "Niemand (Erik doet het nog steeds) of Bart Cannaerts als vaste waarde. Laten we een feitje doen: Wie won DSMTW begin 2025 (het seizoen van eind 2024)?",
-    "answer": "Antwoord afhankelijk van opname, veilige gok: Wie presenteert 'De Slimste Mens'?",
-    "answer": "Erik Van Looy",
-    "category": "TV"
+    "id": 25,
+    "question": "De IJzertoren kennen we allemaal. Vanboven op het kruis staan de letters AVV VVK. Wat betekent deze afkorting?",
+    "answer": "Alles Voor Vlaanderen, Vlaanderen Voor Kristus",
+    "category": "Geschiedenis"
   },
   {
-    "id": 15,
-    "question": "Welke Amerikaanse popster heeft een relatie met American Football-speler Travis Kelce, wat de NFL-kijkcijfers deed ontploffen?",
-    "answer": "Taylor Swift",
-    "category": "Showbizz"
+    "id": 26,
+    "question": "Welke Nederlandse artiest ging viral met het nummer 'Europapa', de inzending voor het Eurovisiesongfestival?",
+    "answer": "Joost Klein",
+    "category": "Muziek & Actua"
   },
   {
-    "id": 16,
-    "question": "Hoe heet het dwergnijlpaardje uit een Thaise dierentuin dat in het najaar van 2024 een wereldwijde internetmeme werd door haar schattige en agressieve gedrag?",
-    "answer": "Moo Deng",
-    "category": "Internet Dieren"
-  },
-  {
-    "id": 17,
-    "question": "Van welke Belgische band is 'The Whistling Song' (waarin ze fluiten) een grote hit? Ze stonden afgelopen zomer weer op alle festivals.",
-    "answer": "The Subs",
-    "category": "Muziek (Belgisch)"
-  },
-  {
-    "id": 18,
-    "question": "Wat is de naam van de AI-assistent van Apple die in 2024/2025 eindelijk een grote update kreeg met 'Apple Intelligence'?",
-    "answer": "Siri",
-    "category": "Tech"
-  },
-  {
-    "id": 19,
-    "question": "Welke politicus en voorzitter van Vooruit kwam in opspraak na een zatte avond in Sint-Niklaas, maar maakte daarna een electorale comeback?",
-    "answer": "Conner Rousseau",
-    "category": "Politiek"
-  },
-  {
-    "id": 20,
-    "question": "In de serie 'Knokke Off' (internationaal 'High Tides'), hoe heet het rijke, ietwat gestoorde personage gespeeld door Willem De Schryver?",
-    "answer": "Alexander (Vandael)",
-    "category": "Netflix & Streamz"
-  },
-  {
-    "id": 21,
-    "question": "Welk land werd in 2024 Europees Kampioen voetbal bij de mannen?",
-    "answer": "Spanje",
-    "category": "Voetbal"
-  },
-  {
-    "id": 22,
+    "id": 27,
     "question": "Wat is de scheikundige naam voor keukenzout? (Simpele formule)",
     "answer": "NaCl (Natriumchloride)",
     "category": "Wetenschap"
   },
   {
-    "id": 23,
-    "question": "Welke Studio 100-figuren dragen respectievelijk een rood, blauw en groen pakje? (Superhelden).",
-    "answer": "Mega Mindy (Nee, fout!) -> Het zijn: De helden van Nachtwacht? Nee. Bedoeld wordt: Mega Mindy is roze. Ah, de vraag is: Wie zijn de helden in 'Nachtwacht'? Nee, te moeilijk. Vraag: Wie is het baasje van Samson?",
-    "answer": "Marie Verhulst",
-    "category": "Studio 100"
-  },
-  {
-    "id": 24,
-    "question": "Op welk sociaal medium kan je enkel foto's posten die je 'nu' maakt, met zowel je voor- als achtercamera tegelijk? (De hype is wat gaan liggen, maar iedereen kent het nog).",
-    "answer": "BeReal",
-    "category": "Apps"
-  },
-  {
-    "id": 25,
-    "question": "Hoe heet de fictieve familie in de hitserie 'Succession', die vecht om de macht in het mediabedrijf Waystar Royco?",
-    "answer": "De familie Roy",
-    "category": "Series"
-  },
-  {
-    "id": 26,
-    "question": "Welke Belgische zangeres zong het officiële EK-lied 'Wunderbar' voor de Rode Duivels in Duitsland?",
-    "answer": "Warrior? Nee, dat was Oscar and the Wolf. Het lied was van: ZwartWerk? Nee. Het officiële lied was 'On Fire' of iets dergelijks. Wacht, betere vraag: Wie zong 'Warrior' voor het WK?",
-    "answer": "Oscar and the Wolf (Max Colombie)",
-    "category": "Muziek"
-  },
-  {
-    "id": 27,
-    "question": "Welk wereldberoemd drankje bestaat uit Aperol, Prosecco en bruiswater?",
-    "answer": "Aperol Spritz",
-    "category": "Terrasjesweer"
-  },
-  {
     "id": 28,
-    "question": "Welke Australische breakdanser (B-girl) werd op de Olympische Spelen in Parijs wereldberoemd (en uitgelachen) om haar 'kangoeroe-moves'?",
-    "answer": "Raygun (Rachel Gunn)",
-    "category": "Viral Memes"
+    "question": "In welk zonnig dorp woont de welbekende stripfiguur Jommeke?",
+    "answer": "Zonnedorp",
+    "category": "Strips"
   },
   {
     "id": 29,
-    "question": "Hoeveel poten heeft een teek? (Let op: het is een spinachtige).",
-    "answer": "8",
-    "category": "Natuur"
+    "question": "Er waait een nieuwe wind door 'The Voice van Vlaanderen'. Niet alleen Joost Klein kwam erbij, ook zij kreeg promotie en schoof door van de online comeback-stage naar een van de vier hoofdstoelen. Wie is deze zangeres?",
+    "answer": "Laura Tesoro",
+    "category": "TV & Muziek"
   },
   {
     "id": 30,
-    "question": "Welke West-Vlaamse regio staat bekend om zijn oorlogsverleden en klaprozen (Poppies)?",
-    "answer": "De Westhoek (Ieper)",
-    "category": "Geografie"
+    "question": "In New York waaide er in november 2025 een linkse wind. Welke onverwachte politicus van de socialisten (DSA) werd verkozen tot nieuwe burgemeester van The Big Apple?",
+    "answer": "Zohran Mamdani",
+    "category": "Politiek Internationaal"
   }
 ]

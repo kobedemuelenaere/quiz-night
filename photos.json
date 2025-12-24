@@ -1,0 +1,82 @@
+[
+  {
+    "id": "hondenrassen",
+    "theme": "Hondenrassen",
+    "photos": [
+      { "file": "Bulldog.jpg", "answer": "Bulldog" },
+      { "file": "cockerspaniel.jpg", "answer": "Cocker Spaniel" },
+      { "file": "goldenretriever.jpg", "answer": "Golden Retriever" },
+      { "file": "malinois.jpg", "answer": "Mechelse Herder / Malinois" },
+      { "file": "poedel.jpg", "answer": "Poedel" },
+      { "file": "weimaraner.webp", "answer": "Weimaraner" }
+    ]
+  },
+  {
+    "id": "politici",
+    "theme": "Belgische Politici",
+    "photos": [
+      { "file": "Bartdewever.png", "answer": "Bart De Wever" },
+      { "file": "benweyts.png", "answer": "Ben Weyts" },
+      { "file": "JanJanbon.png", "answer": "Jan Jambon" },
+      { "file": "matthiasdiependaele.png", "answer": "Matthias Diependaele" },
+      { "file": "Melissadepraetere.png", "answer": "Melissa Depraetere" },
+      { "file": "Theofrancken.png", "answer": "Theo Francken" }
+    ]
+  },
+  {
+    "id": "spreekwoorden",
+    "theme": "Spreekwoorden",
+    "photos": [
+      { "file": "alsjeoverdeduivelspreekt.jpeg", "answer": "Als je over de duivel spreekt" },
+      { "file": "deappelvaltnietvervandeboom.jpeg", "answer": "De appel valt niet ver van de boom" },
+      { "file": "hetzwijndoordebietenjagen.jpeg", "answer": "Het zwijn door de bieten jagen" },
+      { "file": "naregenkomtzonneschein.jpeg", "answer": "Na regen komt zonneschijn" },
+      { "file": "praatjesvullengeengaatjes.jpeg", "answer": "Praatjes vullen geen gaatjes" },
+      { "file": "waarrookisisvuur.jpeg", "answer": "Waar rook is, is vuur" }
+    ]
+  },
+  {
+    "id": "steden",
+    "theme": "Steden",
+    "photos": [
+      { "file": "bergen.jpeg", "answer": "Bergen (Noorwegen)" },
+      { "file": "durbuy.jpeg", "answer": "Durbuy" },
+      { "file": "ghent.jpeg", "answer": "Gent" },
+      { "file": "marbella.jpeg", "answer": "Marbella" },
+      { "file": "marvao.jpeg", "answer": "Marvão" },
+      { "file": "parijs.jpeg", "answer": "Parijs" }
+    ]
+  },
+  {
+    "id": "bedrijven",
+    "theme": "Bedrijven / Merken",
+    "photos": [
+      { "file": "basaltex.png", "answer": "Basaltex" },
+      { "file": "brusselsairlines.png", "answer": "Brussels Airlines" },
+      { "file": "chanel.jpg", "answer": "Chanel" },
+      { "file": "dynamate.jpg", "answer": "Dynamate" },
+      { "file": "renson.jpg", "answer": "Renson" },
+      { "file": "Ugent.jpg", "answer": "UGent" }
+    ]
+  },
+  {
+    "id": "seizoenmannen",
+    "theme": "???-mannen",
+    "photos": [
+      { "file": "herfstman.jpeg", "answer": "Herfstman (Clouseau)" },
+      { "file": "kersman.jpeg", "answer": "Kersman / Kerstman" },
+      { "file": "korstman.jpeg", "answer": "Korstman (Korstmos)" },
+      { "file": "persman.jpeg", "answer": "Persman" },
+      { "file": "petman.jpeg", "answer": "Petman (Robot)" },
+      { "file": "vestman.jpeg", "answer": "Vestman (IJsland)" }
+    ]
+  },
+  {
+    "id": "adressen",
+    "theme": "Adressen",
+    "photos": [
+      { "file": "Plaatsze
+    ]
+  }
+]
+

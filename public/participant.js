@@ -6,6 +6,7 @@ const roundIntroScreen = document.getElementById('round-intro-screen');
 const playingScreen = document.getElementById('playing-screen');
 const puzzleScreen = document.getElementById('puzzle-screen');
 const wavelengthScreen = document.getElementById('wavelength-screen');
+const photoScreen = document.getElementById('photo-screen');
 const finaleScreen = document.getElementById('finale-screen');
 const finishedScreen = document.getElementById('finished-screen');
 
@@ -48,6 +49,17 @@ const puzzleGrid = document.getElementById('puzzle-grid');
 const solvedSolutions = document.getElementById('solved-solutions');
 const puzzleScoreboardList = document.getElementById('puzzle-scoreboard-list');
 
+// Photo elements
+const photoNum = document.getElementById('photo-num');
+const photoPlayerName = document.getElementById('photo-player-name');
+const photoPlayerTime = document.getElementById('photo-player-time');
+const currentPhotoImg = document.getElementById('current-photo-img');
+const photoContainer = document.getElementById('photo-container');
+const photoPhaseIndicator = document.getElementById('photo-phase-indicator');
+const photoSupplementInfo = document.getElementById('photo-supplement-info');
+const supplementPlayerName = document.getElementById('supplement-player-name');
+const photoScoreboardList = document.getElementById('photo-scoreboard-list');
+
 // Finished elements
 const finalScoreboard = document.getElementById('final-scoreboard');
 
@@ -63,6 +75,8 @@ socket.on('gameState', (state) => {
     updatePuzzleScreen(state);
   } else if (state.phase === 'wavelength') {
     updateWavelengthScreen(state);
+  } else if (state.phase === 'photos') {
+    updatePhotoScreen(state);
   } else if (state.phase === 'finale') {
     updateFinaleScreen(state);
   } else if (state.phase === 'finished') {
@@ -76,6 +90,7 @@ function updateScreen(phase) {
   playingScreen.classList.add('hidden');
   if (puzzleScreen) puzzleScreen.classList.add('hidden');
   if (wavelengthScreen) wavelengthScreen.classList.add('hidden');
+  if (photoScreen) photoScreen.classList.add('hidden');
   if (finaleScreen) finaleScreen.classList.add('hidden');
   finishedScreen.classList.add('hidden');
   
@@ -89,6 +104,8 @@ function updateScreen(phase) {
     if (puzzleScreen) puzzleScreen.classList.remove('hidden');
   } else if (phase === 'wavelength') {
     if (wavelengthScreen) wavelengthScreen.classList.remove('hidden');
+  } else if (phase === 'photos') {
+    if (photoScreen) photoScreen.classList.remove('hidden');
   } else if (phase === 'finale') {
     if (finaleScreen) finaleScreen.classList.remove('hidden');
   } else if (phase === 'finished') {
@@ -279,6 +296,109 @@ function updatePuzzleScreen(state) {
   // All players' time
   if (puzzleScoreboardList) {
     updateTimeList(state.scores, state.puzzleActivePlayer, puzzleScoreboardList);
+  }
+}
+
+function updatePhotoScreen(state) {
+  if (!photoScreen) return;
+  
+  // Update photo counter
+  if (photoNum) {
+    photoNum.textContent = state.currentPhotoIndex + 1;
+  }
+  
+  // Update player info
+  if (photoPlayerName) {
+    photoPlayerName.textContent = state.photoActivePlayer || 'Wachten...';
+  }
+  
+  if (photoPlayerTime && state.photoActivePlayer) {
+    const time = state.scores[state.photoActivePlayer] || 0;
+    photoPlayerTime.textContent = time;
+    
+    // Color based on time
+    const playerDisplay = document.querySelector('.photo-player-display');
+    if (playerDisplay) {
+      playerDisplay.classList.remove('danger', 'warning');
+      if (time <= 10) {
+        playerDisplay.classList.add('danger');
+      } else if (time <= 30) {
+        playerDisplay.classList.add('warning');
+      }
+    }
+  }
+  
+  // Update phase indicator
+  if (photoPhaseIndicator) {
+    const phases = {
+      'select': 'Wachten op selectie...',
+      'playing': `Foto ${state.currentPhotoIndex + 1}/6`,
+      'supplement': 'Aanvullen',
+      'review': 'Overzicht'
+    };
+    photoPhaseIndicator.textContent = phases[state.photoPhase] || '';
+  }
+  
+  // Show/hide supplement info
+  if (photoSupplementInfo) {
+    if (state.photoPhase === 'supplement' && state.photoSupplementPlayer) {
+      photoSupplementInfo.classList.remove('hidden');
+      if (supplementPlayerName) {
+        supplementPlayerName.textContent = state.photoSupplementPlayer;
+      }
+    } else {
+      photoSupplementInfo.classList.add('hidden');
+    }
+  }
+  
+  // Update photo display
+  if (currentPhotoImg && photoContainer) {
+    if (state.photoPhase === 'select') {
+      // Waiting for player selection
+      photoContainer.classList.add('waiting');
+      currentPhotoImg.src = '';
+      currentPhotoImg.alt = 'Wachten op speler...';
+    } else if (state.photoPhase === 'playing' && state.currentPhoto) {
+      // Show current photo
+      photoContainer.classList.remove('waiting');
+      currentPhotoImg.src = `/pictures/${state.currentPhoto.file}`;
+      currentPhotoImg.alt = 'Quiz foto';
+    } else if (state.photoPhase === 'supplement') {
+      // Show skipped photos during supplement
+      const skipped = state.photoSkippedAnswers.filter(
+        idx => !state.photoCorrectAnswers.includes(idx)
+      );
+      if (skipped.length > 0 && state.currentPhotoSet) {
+        const firstSkipped = state.currentPhotoSet.photos[skipped[0]];
+        if (firstSkipped) {
+          currentPhotoImg.src = `/pictures/${firstSkipped.file}`;
+          currentPhotoImg.alt = 'Open foto';
+        }
+      } else {
+        currentPhotoImg.src = '';
+        currentPhotoImg.alt = 'Geen open foto\'s meer';
+      }
+    } else if (state.photoPhase === 'review' && state.currentPhotoSet) {
+      // Show all photos in review
+      photoContainer.innerHTML = `
+        <div class="review-grid">
+          ${state.currentPhotoSet.photos.map((photo, idx) => {
+            const isCorrect = state.photoCorrectAnswers.includes(idx);
+            return `
+              <div class="review-photo-item ${isCorrect ? 'correct' : 'missed'}">
+                <img src="/pictures/${photo.file}" alt="${photo.answer}">
+                <div class="review-answer">${photo.answer}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+  }
+  
+  // Update scoreboard
+  if (photoScoreboardList) {
+    updateTimeList(state.scores, state.photoActivePlayer, photoScoreboardList);
   }
 }
 

@@ -6,6 +6,7 @@ const roundIntroScreen = document.getElementById('round-intro-screen');
 const playingScreen = document.getElementById('playing-screen');
 const puzzleScreen = document.getElementById('puzzle-screen');
 const wavelengthScreen = document.getElementById('wavelength-screen');
+const photoScreen = document.getElementById('photo-screen');
 const finaleScreen = document.getElementById('finale-screen');
 const finishedScreen = document.getElementById('finished-screen');
 
@@ -79,6 +80,33 @@ const puzzleScoreboardList = document.getElementById('puzzle-scoreboard-list');
 const nextPuzzleBtn = document.getElementById('next-puzzle-btn');
 const backToQuestionsBtn = document.getElementById('back-to-questions-btn');
 const puzzleResetBtn = document.getElementById('puzzle-reset-btn');
+
+// Photo elements
+const photoPlayerNumEl = document.getElementById('photo-player-num');
+const photoTotalPlayersEl = document.getElementById('photo-total-players');
+const photoSelectSection = document.getElementById('photo-select-section');
+const playerSelectButtons = document.getElementById('player-select-buttons');
+const photoPlayingSection = document.getElementById('photo-playing-section');
+const presenterPhotoPlayer = document.getElementById('presenter-photo-player');
+const presenterPhotoTimer = document.getElementById('presenter-photo-timer');
+const presenterPhotoNum = document.getElementById('presenter-photo-num');
+const presenterPhotoImg = document.getElementById('presenter-photo-img');
+const photoAnswerText = document.getElementById('photo-answer-text');
+const photoCorrectBtn = document.getElementById('photo-correct-btn');
+const photoSkipBtn = document.getElementById('photo-skip-btn');
+const photoSupplementSection = document.getElementById('photo-supplement-section');
+const presenterSupplementPlayer = document.getElementById('presenter-supplement-player');
+const skippedPhotosGrid = document.getElementById('skipped-photos-grid');
+const supplementCorrectBtn = document.getElementById('supplement-correct-btn');
+const supplementNextBtn = document.getElementById('supplement-next-btn');
+const photoReviewSection = document.getElementById('photo-review-section');
+const reviewPhotosGrid = document.getElementById('review-photos-grid');
+const photoNextPlayerBtn = document.getElementById('photo-next-player-btn');
+const photoShowReviewBtn = document.getElementById('photo-show-review-btn');
+const photoCorrectCount = document.getElementById('photo-correct-count');
+const photoSkippedCount = document.getElementById('photo-skipped-count');
+const photoPresenterScoreboard = document.getElementById('photo-presenter-scoreboard');
+const photoResetBtn = document.getElementById('photo-reset-btn');
 
 // Finale elements
 const finaleNum = document.getElementById('finale-num');
@@ -265,6 +293,8 @@ socket.on('gameState', (state) => {
     updatePuzzlePresenterScreen(state);
   } else if (state.phase === 'wavelength') {
     updateWavelengthPresenterScreen(state);
+  } else if (state.phase === 'photos') {
+    updatePhotoPresenterScreen(state);
   } else if (state.phase === 'finale') {
     updateFinalePresenterScreen(state);
   } else if (state.phase === 'finished') {
@@ -293,6 +323,7 @@ function updateScreen(phase) {
   playingScreen.classList.add('hidden');
   if (puzzleScreen) puzzleScreen.classList.add('hidden');
   if (wavelengthScreen) wavelengthScreen.classList.add('hidden');
+  if (photoScreen) photoScreen.classList.add('hidden');
   if (finaleScreen) finaleScreen.classList.add('hidden');
   finishedScreen.classList.add('hidden');
   
@@ -306,6 +337,8 @@ function updateScreen(phase) {
     if (puzzleScreen) puzzleScreen.classList.remove('hidden');
   } else if (phase === 'wavelength') {
     if (wavelengthScreen) wavelengthScreen.classList.remove('hidden');
+  } else if (phase === 'photos') {
+    if (photoScreen) photoScreen.classList.remove('hidden');
   } else if (phase === 'finale') {
     if (finaleScreen) finaleScreen.classList.remove('hidden');
   } else if (phase === 'finished') {
@@ -520,6 +553,121 @@ function updateWavelengthPresenterScreen(state) {
   }
 }
 
+function updatePhotoPresenterScreen(state) {
+  if (!photoScreen) return;
+  
+  // Update progress
+  if (photoPlayerNumEl) photoPlayerNumEl.textContent = state.photoPlayerIndex + 1;
+  if (photoTotalPlayersEl) photoTotalPlayersEl.textContent = state.participants.length;
+  
+  // Show/hide sections based on phase
+  if (photoSelectSection) photoSelectSection.classList.toggle('hidden', state.photoPhase !== 'select');
+  if (photoPlayingSection) photoPlayingSection.classList.toggle('hidden', state.photoPhase !== 'playing');
+  if (photoSupplementSection) photoSupplementSection.classList.toggle('hidden', state.photoPhase !== 'supplement');
+  if (photoReviewSection) photoReviewSection.classList.toggle('hidden', state.photoPhase !== 'review');
+  if (photoShowReviewBtn) photoShowReviewBtn.classList.toggle('hidden', state.photoPhase !== 'supplement');
+  
+  // Player selection phase
+  if (state.photoPhase === 'select' && playerSelectButtons) {
+    // Show buttons for players who haven't played yet
+    const playedPlayers = Object.keys(state.photoSetAssignments).slice(0, state.photoPlayerIndex);
+    playerSelectButtons.innerHTML = state.participants.map(player => {
+      const hasPlayed = playedPlayers.includes(player);
+      const hasSet = !!state.photoSetAssignments[player];
+      return `
+        <button class="btn btn-player-select ${hasPlayed ? 'played' : ''}" 
+                onclick="selectPhotoPlayer('${player}')"
+                ${hasPlayed || !hasSet ? 'disabled' : ''}>
+          ${player}
+          ${hasPlayed ? ' ✓' : ''}
+        </button>
+      `;
+    }).join('');
+  }
+  
+  // Playing phase
+  if (state.photoPhase === 'playing') {
+    if (presenterPhotoPlayer) presenterPhotoPlayer.textContent = state.photoActivePlayer || '-';
+    if (presenterPhotoTimer && state.photoActivePlayer) {
+      const time = state.scores[state.photoActivePlayer] || 0;
+      presenterPhotoTimer.textContent = time;
+      presenterPhotoTimer.className = 'photo-active-timer';
+      if (time <= 10) presenterPhotoTimer.classList.add('danger');
+      else if (time <= 30) presenterPhotoTimer.classList.add('warning');
+    }
+    if (presenterPhotoNum) presenterPhotoNum.textContent = state.currentPhotoIndex + 1;
+    
+    // Show current photo
+    if (presenterPhotoImg && state.currentPhoto) {
+      presenterPhotoImg.src = `/pictures/${state.currentPhoto.file}`;
+    }
+    
+    // Show answer
+    if (photoAnswerText && state.currentPhoto) {
+      photoAnswerText.textContent = state.currentPhoto.answer;
+    }
+  }
+  
+  // Supplement phase
+  if (state.photoPhase === 'supplement') {
+    if (presenterSupplementPlayer) {
+      presenterSupplementPlayer.textContent = state.photoSupplementPlayer || 'Klaar met aanvullen';
+    }
+    
+    // Show skipped photos
+    if (skippedPhotosGrid && state.currentPhotoSet) {
+      const skipped = state.photoSkippedAnswers.filter(
+        idx => !state.photoCorrectAnswers.includes(idx)
+      );
+      skippedPhotosGrid.innerHTML = skipped.map(idx => {
+        const photo = state.currentPhotoSet.photos[idx];
+        return `
+          <div class="skipped-photo-item">
+            <img src="/pictures/${photo.file}" alt="${photo.answer}">
+            <div class="skipped-answer">${photo.answer}</div>
+          </div>
+        `;
+      }).join('') || '<p class="no-skipped">Geen open foto\'s meer!</p>';
+    }
+    
+    // Disable supplement correct if no skipped photos left
+    if (supplementCorrectBtn) {
+      const skipped = state.photoSkippedAnswers.filter(
+        idx => !state.photoCorrectAnswers.includes(idx)
+      );
+      supplementCorrectBtn.disabled = skipped.length === 0;
+    }
+  }
+  
+  // Review phase
+  if (state.photoPhase === 'review' && reviewPhotosGrid && state.currentPhotoSet) {
+    reviewPhotosGrid.innerHTML = state.currentPhotoSet.photos.map((photo, idx) => {
+      const isCorrect = state.photoCorrectAnswers.includes(idx);
+      return `
+        <div class="review-photo-item ${isCorrect ? 'correct' : 'missed'}">
+          <img src="/pictures/${photo.file}" alt="${photo.answer}">
+          <div class="review-answer">${photo.answer}</div>
+          <div class="review-status">${isCorrect ? '✓ Correct' : '✗ Gemist'}</div>
+        </div>
+      `;
+    }).join('');
+  }
+  
+  // Stats
+  if (photoCorrectCount) photoCorrectCount.textContent = state.photoCorrectAnswers.length;
+  if (photoSkippedCount) {
+    const skipped = state.photoSkippedAnswers.filter(
+      idx => !state.photoCorrectAnswers.includes(idx)
+    );
+    photoSkippedCount.textContent = skipped.length;
+  }
+  
+  // Scoreboard
+  if (photoPresenterScoreboard) {
+    updateScoreboard(state.scores, photoPresenterScoreboard, false, true);
+  }
+}
+
 function updateFinalePresenterScreen(state) {
   if (!finaleNum || !finaleTotal) return;
   
@@ -657,7 +805,41 @@ function finaleCorrect(answerIndex) {
   socket.emit('finaleCorrect', answerIndex);
 }
 
+// Photo round controls
+if (photoCorrectBtn) {
+  photoCorrectBtn.addEventListener('click', () => socket.emit('photoCorrect'));
+}
+if (photoSkipBtn) {
+  photoSkipBtn.addEventListener('click', () => socket.emit('photoSkip'));
+}
+if (supplementCorrectBtn) {
+  supplementCorrectBtn.addEventListener('click', () => socket.emit('photoCorrect'));
+}
+if (supplementNextBtn) {
+  supplementNextBtn.addEventListener('click', () => socket.emit('photoNextSupplement'));
+}
+if (photoShowReviewBtn) {
+  photoShowReviewBtn.addEventListener('click', () => socket.emit('photoShowReview'));
+}
+if (photoNextPlayerBtn) {
+  photoNextPlayerBtn.addEventListener('click', () => socket.emit('photoNextPlayer'));
+}
+if (photoResetBtn) {
+  photoResetBtn.addEventListener('click', () => {
+    if (confirm('Are you sure you want to reset the game?')) {
+      participants = [];
+      socket.emit('resetGame');
+    }
+  });
+}
+
+// Select photo player
+function selectPhotoPlayer(playerName) {
+  socket.emit('photoSelectPlayer', playerName);
+}
+
 // Make functions available globally
 window.removeParticipant = removeParticipant;
 window.solveSolution = solveSolution;
 window.finaleCorrect = finaleCorrect;
+window.selectPhotoPlayer = selectPhotoPlayer;

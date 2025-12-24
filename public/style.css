@@ -2773,3 +2773,517 @@ body {
   background: var(--text-muted);
 }
 
+/* ========================================
+   PHOTO ROUND STYLES
+   ======================================== */
+
+/* === Photo Screen (Participant) === */
+.photo-header {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.photo-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.5rem;
+  background: linear-gradient(135deg, #ec4899, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.photo-counter {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.photo-counter span {
+  color: #ec4899;
+  font-weight: 700;
+}
+
+/* === Photo Player Section === */
+.photo-player-section {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.photo-player-display {
+  display: inline-block;
+  background: var(--bg-card);
+  border: 3px solid #ec4899;
+  border-radius: 1.5rem;
+  padding: 1.5rem 3rem;
+  box-shadow: 0 0 40px rgba(236, 72, 153, 0.4);
+  transition: all 0.3s ease;
+}
+
+.photo-player-display.warning {
+  border-color: var(--accent-warning);
+  box-shadow: 0 0 40px rgba(245, 158, 11, 0.4);
+}
+
+.photo-player-display.danger {
+  border-color: var(--accent-danger);
+  box-shadow: 0 0 40px rgba(239, 68, 68, 0.4);
+  animation: timerPulse 0.5s ease-in-out infinite;
+}
+
+.photo-player-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: #ec4899;
+  letter-spacing: 0.05em;
+}
+
+.photo-player-display.warning .photo-player-name {
+  color: var(--accent-warning);
+}
+
+.photo-player-display.danger .photo-player-name {
+  color: var(--accent-danger);
+}
+
+.photo-player-time {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.photo-player-label {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+/* === Photo Display Area === */
+.photo-display-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.photo-container {
+  max-width: 900px;
+  width: 100%;
+  background: var(--bg-card);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.photo-container.waiting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.photo-container.waiting::before {
+  content: 'Wachten op speler...';
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: var(--text-muted);
+}
+
+.quiz-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+/* === Photo Phase Indicator === */
+.photo-phase-indicator {
+  text-align: center;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+}
+
+/* === Photo Supplement Info === */
+.photo-supplement-info {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 2px solid var(--accent-secondary);
+  border-radius: 1rem;
+  margin: 1rem auto;
+  max-width: 400px;
+}
+
+.supplement-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.supplement-player-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  color: var(--accent-secondary);
+}
+
+/* === Photo All Times === */
+.photo-all-times {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  min-width: 180px;
+}
+
+/* === Review Grid === */
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.review-photo-item {
+  background: var(--bg-card-light);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.review-photo-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.review-answer {
+  padding: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.review-photo-item.correct {
+  border-color: var(--accent-success);
+}
+
+.review-photo-item.correct .review-answer {
+  color: var(--accent-success);
+}
+
+.review-photo-item.missed {
+  border-color: var(--accent-danger);
+  opacity: 0.7;
+}
+
+.review-photo-item.missed .review-answer {
+  color: var(--accent-danger);
+}
+
+.review-status {
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* === Presenter Photo Screen === */
+.presenter-photo .photo-presenter-layout {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1400px;
+  height: 90vh;
+}
+
+.photo-panel {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.photo-header-presenter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.photo-header-presenter h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #ec4899, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.photo-progress {
+  color: var(--text-secondary);
+}
+
+.photo-progress span {
+  color: #ec4899;
+  font-weight: 700;
+}
+
+/* === Player Selection === */
+.photo-select-section h3,
+.photo-supplement-section h3,
+.photo-review-section h3 {
+  font-size: 1rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.player-select-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.btn-player-select {
+  background: var(--bg-card-light);
+  color: var(--text-primary);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-player-select:hover:not(:disabled) {
+  border-color: #ec4899;
+  color: #ec4899;
+  transform: translateY(-2px);
+}
+
+.btn-player-select.played {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: var(--accent-success);
+  color: var(--accent-success);
+  cursor: not-allowed;
+}
+
+/* === Photo Active Card (Presenter) === */
+.photo-active-card {
+  background: var(--bg-card-light);
+  border: 3px solid #ec4899;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+}
+
+.photo-active-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: #ec4899;
+}
+
+.photo-active-timer {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.photo-active-timer.warning {
+  color: var(--accent-warning);
+}
+
+.photo-active-timer.danger {
+  color: var(--accent-danger);
+  animation: timerPulse 0.5s ease-in-out infinite;
+}
+
+.photo-counter-presenter {
+  text-align: center;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.photo-counter-presenter span {
+  color: #ec4899;
+  font-weight: 700;
+}
+
+/* === Presenter Photo Container === */
+.presenter-photo-container {
+  margin-bottom: 1rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.presenter-quiz-photo {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  display: block;
+}
+
+/* === Photo Answer Display === */
+.photo-answer-display {
+  background: var(--bg-card-light);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(124, 58, 237, 0.3);
+}
+
+.photo-answer-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent-secondary);
+}
+
+/* === Photo Action Buttons === */
+.photo-action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+/* === Supplement Section === */
+.supplement-player-card {
+  background: var(--bg-card-light);
+  border: 2px solid var(--accent-secondary);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.supplement-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.75rem;
+  color: var(--accent-secondary);
+}
+
+.skipped-photos-section h4 {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.skipped-photos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.skipped-photo-item {
+  background: var(--bg-card-light);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 2px solid var(--accent-warning);
+}
+
+.skipped-photo-item img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+}
+
+.skipped-answer {
+  padding: 0.5rem;
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--accent-warning);
+  font-weight: 600;
+}
+
+.no-skipped {
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+  padding: 1rem;
+}
+
+.supplement-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* === Review Section === */
+.review-photos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+/* === Photo Control Panel === */
+.photo-control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.photo-results-section {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+
+.photo-results-section h3 {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+.photo-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+}
+
+.stat-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: var(--accent-primary);
+}
+
