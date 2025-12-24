@@ -27,11 +27,26 @@
     "id": "spreekwoorden",
     "theme": "Spreekwoorden",
     "photos": [
-      { "file": "alsjeoverdeduivelspreekt.jpeg", "answer": "Als je over de duivel spreekt" },
-      { "file": "deappelvaltnietvervandeboom.jpeg", "answer": "De appel valt niet ver van de boom" },
-      { "file": "hetzwijndoordebietenjagen.jpeg", "answer": "Het zwijn door de bieten jagen" },
-      { "file": "naregenkomtzonneschein.jpeg", "answer": "Na regen komt zonneschijn" },
-      { "file": "praatjesvullengeengaatjes.jpeg", "answer": "Praatjes vullen geen gaatjes" },
+      {
+        "file": "alsjeoverdeduivelspreekt.jpeg",
+        "answer": "Als je over de duivel spreekt"
+      },
+      {
+        "file": "deappelvaltnietvervandeboom.jpeg",
+        "answer": "De appel valt niet ver van de boom"
+      },
+      {
+        "file": "hetzwijndoordebietenjagen.jpeg",
+        "answer": "Het zwijn door de bieten jagen"
+      },
+      {
+        "file": "naregenkomtzonneschein.jpeg",
+        "answer": "Na regen komt zonneschijn"
+      },
+      {
+        "file": "praatjesvullengeengaatjes.jpeg",
+        "answer": "Praatjes vullen geen gaatjes"
+      },
       { "file": "waarrookisisvuur.jpeg", "answer": "Waar rook is, is vuur" }
     ]
   },
@@ -75,8 +90,12 @@
     "id": "adressen",
     "theme": "Adressen",
     "photos": [
-      { "file": "Plaatsze
+      { "file": "Hofstraat.png", "answer": "Hofstraat" },
+      { "file": "jachtveldstraat.png", "answer": "Jachtveldstraat" },
+      { "file": "Plaatsweg.png", "answer": "Plaatsweg" },
+      { "file": "vlasbloemstraat.png", "answer": "Vlasbloemstraat" },
+      { "file": "Nieuwpoort.png", "answer": "Nieuwpoort" },
+      { "file": "theodoorsevens.png", "answer": "Theodoor Sevenslaan" }
     ]
   }
 ]
-

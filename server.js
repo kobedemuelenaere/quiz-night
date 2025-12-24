@@ -17,7 +17,7 @@ const questions = JSON.parse(fs.readFileSync(path.join(__dirname, 'questions.jso
 const puzzles = JSON.parse(fs.readFileSync(path.join(__dirname, 'puzzles.json'), 'utf8'));
 const wavelengthCards = JSON.parse(fs.readFileSync(path.join(__dirname, 'wavelength.json'), 'utf8'));
 const finaleTopics = JSON.parse(fs.readFileSync(path.join(__dirname, 'finale.json'), 'utf8'));
-const photoSets = JSON.parse(fs.readFileSync(path.join(__dirname, 'photos.json'), 'utf8'));
+const photoSets = JSON.parse(fs.readFileSync(path.join(__dirname, 'photo.json'), 'utf8'));
 const defaultParticipants = JSON.parse(fs.readFileSync(path.join(__dirname, 'participants.json'), 'utf8'));
 
 // Endpoint to get default participants
@@ -77,26 +77,19 @@ const ROUNDS = {
       <p>⏱️ Elke puzzel start met een andere speler (eerlijke rotatie).</p>
     `
   },
-  photos: {
+  photo: {
     number: 4,
     titleEN: 'PHOTO ROUND',
     titleNL: 'FOTORONDE',
     explanationPresenter: `
       <h2>📸 Round 4: FOTORONDE</h2>
-      <p>Net zoals in <strong>De Slimste Mens</strong>!</p>
-      <p>Elke speler krijgt <strong>6 foto's</strong> te zien.</p>
-      <p>Je tijd loopt terwijl je nadenkt!</p>
-      <br>
-      <p><strong>Presentator:</strong></p>
-      <ul>
-        <li>Kies welke speler aan de beurt is</li>
-        <li>Klik START om te beginnen</li>
-        <li>CORRECT = volgende foto + antwoord opgeslagen</li>
-        <li>SKIP = volgende foto (niet beantwoord)</li>
-      </ul>
-      <br>
-      <p>Na alle 6 foto's stopt de tijd en mogen <strong>andere spelers aanvullen</strong>.</p>
-      <p>Daarna kun je alle foto's nog eens tonen als overzicht.</p>
+      <p>Net zoals in De Slimste Mens!</p>
+      <p>Elke speler krijgt <strong>6 foto's</strong> te zien, één voor één.</p>
+      <p>Je tijd begint te lopen bij de <strong>eerste foto</strong>.</p>
+      <p>Raad de foto of zeg <strong>SKIP</strong> voor de volgende.</p>
+      <p>Na 6 foto's stopt je tijd en mogen anderen <strong>aanvullen</strong>.</p>
+      <p><strong>Correct antwoord?</strong> → +20 seconden!</p>
+      <p>Na alle antwoorden: recap van alle foto's.</p>
     `
   },
   finale: {
@@ -146,6 +139,16 @@ let gameState = {
   wavelengthGuess: 50,
   wavelengthRevealed: false,
   wavelengthScore: null,
+  // Photo round state
+  currentPhotoSetIndex: 0,
+  currentPhotoSet: null,
+  currentPhotoIndex: 0, // Which photo we're on (0-5)
+  photoActivePlayer: null,
+  photoPlayerIndex: 0, // Which player's turn (main turn)
+  photoAddingPlayerIndex: 0, // Which player is adding answers after main player
+  photoPhase: 'waiting', // 'waiting', 'showing', 'adding', 'recap'
+  photoAnswersFound: [], // Array of indices of correct answers
+  photoStarted: false, // Whether timer has started for this player
   // Finale state
   finalists: [], // Top 2 players
   finaleScores: {}, // Separate scores for finale
@@ -156,20 +159,7 @@ let gameState = {
   finaleWinner: null,
   finalePaused: false, // Pause state for finale
   finaleRevealed: false, // Whether answers are revealed
-  finaleTopicStarter: null, // Who started the current topic
-  // Photo round state
-  photoRoundStarted: false,
-  photoActivePlayer: null,
-  photoPlayerIndex: 0, // Which player's turn it is
-  currentPhotoSetIndex: 0, // Which photo set we're on
-  currentPhotoIndex: 0, // Which photo within the set (0-5)
-  photoCorrectAnswers: [], // Indices of correctly answered photos
-  photoSkippedAnswers: [], // Indices of skipped photos
-  photoTimerRunning: false,
-  photoPhase: 'select', // 'select', 'playing', 'supplement', 'review'
-  photoSupplementPlayer: null, // Who is supplementing
-  photoSupplementIndex: 0, // Index of supplementing player
-  photoSetAssignments: {} // Which player gets which photo set
+  finaleTopicStarter: null // Who started the current topic
 };
 
 // Timer interval
@@ -204,6 +194,15 @@ function resetGame() {
     wavelengthGuess: 50,
     wavelengthRevealed: false,
     wavelengthScore: null,
+    currentPhotoSetIndex: 0,
+    currentPhotoSet: null,
+    currentPhotoIndex: 0,
+    photoActivePlayer: null,
+    photoPlayerIndex: 0,
+    photoAddingPlayerIndex: 0,
+    photoPhase: 'waiting',
+    photoAnswersFound: [],
+    photoStarted: false,
     finalists: [],
     finaleScores: {},
     currentFinaleTopicIndex: 0,
@@ -213,19 +212,7 @@ function resetGame() {
     finaleWinner: null,
     finalePaused: false,
     finaleRevealed: false,
-    finaleTopicStarter: null,
-    photoRoundStarted: false,
-    photoActivePlayer: null,
-    photoPlayerIndex: 0,
-    currentPhotoSetIndex: 0,
-    currentPhotoIndex: 0,
-    photoCorrectAnswers: [],
-    photoSkippedAnswers: [],
-    photoTimerRunning: false,
-    photoPhase: 'select',
-    photoSupplementPlayer: null,
-    photoSupplementIndex: 0,
-    photoSetAssignments: {}
+    finaleTopicStarter: null
   };
 }
 
@@ -451,6 +438,65 @@ function startFinaleRound() {
   setupFinaleTopic();
 }
 
+// Start photo round
+function startPhotoRound() {
+  gameState.phase = 'photo';
+  gameState.currentPhotoSetIndex = 0;
+  gameState.photoPlayerIndex = 0;
+  gameState.photoPhase = 'waiting';
+  setupPhotoSet();
+}
+
+// Setup new photo set for current player
+function setupPhotoSet() {
+  if (gameState.currentPhotoSetIndex >= photoSets.length) {
+    // No more photo sets, go to finale
+    gameState.phase = 'round-intro';
+    gameState.currentRound = 'finale';
+    return;
+  }
+  
+  gameState.currentPhotoSet = photoSets[gameState.currentPhotoSetIndex];
+  gameState.currentPhotoIndex = 0;
+  gameState.photoAnswersFound = [];
+  gameState.photoStarted = false;
+  gameState.photoPhase = 'waiting';
+  gameState.photoActivePlayer = gameState.participants[gameState.photoPlayerIndex];
+  gameState.photoAddingPlayerIndex = gameState.photoPlayerIndex;
+}
+
+// Start photo timer (when showing first photo)
+function startPhotoTimer() {
+  stopTimer();
+  gameState.timerRunning = true;
+  gameState.photoStarted = true;
+  
+  timerInterval = setInterval(() => {
+    if (gameState.phase !== 'photo' || !gameState.timerRunning) {
+      return;
+    }
+    
+    const player = gameState.photoActivePlayer;
+    if (player && gameState.scores[player] !== undefined) {
+      gameState.scores[player] = Math.max(0, gameState.scores[player] - 1);
+      broadcastState();
+    }
+  }, 1000);
+}
+
+// Get next player for adding answers (skip the main player)
+function getNextPhotoAddingPlayer() {
+  const numPlayers = gameState.participants.length;
+  let nextIndex = (gameState.photoAddingPlayerIndex + 1) % numPlayers;
+  
+  // If we've gone through all players, we're done adding
+  if (nextIndex === gameState.photoPlayerIndex) {
+    return null;
+  }
+  
+  return nextIndex;
+}
+
 // Setup new finale topic
 function setupFinaleTopic() {
   if (gameState.currentFinaleTopicIndex >= finaleTopics.length) {
@@ -560,116 +606,6 @@ function switchFinalePlayer() {
   gameState.finaleActivePlayer = otherPlayer;
 }
 
-// Start photo round
-function startPhotoRound() {
-  gameState.phase = 'photos';
-  gameState.photoRoundStarted = true;
-  gameState.photoPlayerIndex = 0;
-  gameState.currentPhotoSetIndex = 0;
-  gameState.photoPhase = 'select';
-  gameState.photoActivePlayer = null;
-  
-  // Assign photo sets to players (shuffle sets)
-  const shuffledSets = [...photoSets];
-  for (let i = shuffledSets.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffledSets[i], shuffledSets[j]] = [shuffledSets[j], shuffledSets[i]];
-  }
-  
-  gameState.photoSetAssignments = {};
-  gameState.participants.forEach((player, idx) => {
-    if (idx < shuffledSets.length) {
-      gameState.photoSetAssignments[player] = shuffledSets[idx];
-    }
-  });
-}
-
-// Start photo timer for a player
-function startPhotoTimer() {
-  stopTimer();
-  gameState.photoTimerRunning = true;
-  
-  timerInterval = setInterval(() => {
-    if (gameState.phase !== 'photos' || !gameState.photoTimerRunning) {
-      return;
-    }
-    
-    const player = gameState.photoActivePlayer;
-    if (player && gameState.scores[player] !== undefined) {
-      gameState.scores[player] = Math.max(0, gameState.scores[player] - 1);
-      broadcastState();
-    }
-  }, 1000);
-}
-
-// Stop photo timer
-function stopPhotoTimer() {
-  gameState.photoTimerRunning = false;
-  if (timerInterval) {
-    clearInterval(timerInterval);
-    timerInterval = null;
-  }
-}
-
-// Get current photo set for active player
-function getCurrentPhotoSet() {
-  if (!gameState.photoActivePlayer) return null;
-  return gameState.photoSetAssignments[gameState.photoActivePlayer] || null;
-}
-
-// Get current photo
-function getCurrentPhoto() {
-  const set = getCurrentPhotoSet();
-  if (!set || gameState.currentPhotoIndex >= set.photos.length) return null;
-  return set.photos[gameState.currentPhotoIndex];
-}
-
-// Move to next photo
-function nextPhoto() {
-  gameState.currentPhotoIndex++;
-  if (gameState.currentPhotoIndex >= 6) {
-    // All 6 photos shown - stop timer, go to supplement phase
-    stopPhotoTimer();
-    gameState.photoPhase = 'supplement';
-    gameState.photoSupplementIndex = 0;
-    setupNextSupplementPlayer();
-  }
-}
-
-// Setup next player to supplement
-function setupNextSupplementPlayer() {
-  const mainPlayer = gameState.photoActivePlayer;
-  const otherPlayers = gameState.participants.filter(p => p !== mainPlayer);
-  
-  if (gameState.photoSupplementIndex >= otherPlayers.length) {
-    // All players have supplemented - go to review
-    gameState.photoPhase = 'review';
-    gameState.photoSupplementPlayer = null;
-  } else {
-    gameState.photoSupplementPlayer = otherPlayers[gameState.photoSupplementIndex];
-  }
-}
-
-// Move to next player in photo round
-function nextPhotoPlayer() {
-  gameState.photoPlayerIndex++;
-  
-  if (gameState.photoPlayerIndex >= gameState.participants.length) {
-    // All players done - go to finale
-    gameState.phase = 'round-intro';
-    gameState.currentRound = 'finale';
-  } else {
-    // Reset for next player
-    gameState.photoPhase = 'select';
-    gameState.photoActivePlayer = null;
-    gameState.currentPhotoIndex = 0;
-    gameState.photoCorrectAnswers = [];
-    gameState.photoSkippedAnswers = [];
-    gameState.photoSupplementIndex = 0;
-    gameState.photoSupplementPlayer = null;
-  }
-}
-
 // Socket.io connection handling
 io.on('connection', (socket) => {
   console.log('Client connected:', socket.id);
@@ -698,7 +634,7 @@ io.on('connection', (socket) => {
       startPuzzleRound();
     } else if (gameState.currentRound === 'wavelength') {
       startWavelengthRound();
-    } else if (gameState.currentRound === 'photos') {
+    } else if (gameState.currentRound === 'photo') {
       startPhotoRound();
     } else if (gameState.currentRound === 'finale') {
       startFinaleRound();
@@ -842,9 +778,9 @@ io.on('connection', (socket) => {
     gameState.isPassing = false;
     
     if (gameState.currentPuzzleIndex >= puzzles.length) {
-      // Go to photos after puzzles
+      // Go to photo round after puzzles
       gameState.phase = 'round-intro';
-      gameState.currentRound = 'photos';
+      gameState.currentRound = 'photo';
     } else {
       shufflePuzzleGrid(); // Shuffle the grid for new puzzle
       const baseIndex = gameState.currentPuzzleIndex % gameState.participants.length;
@@ -903,6 +839,153 @@ io.on('connection', (socket) => {
       setupWavelengthCard();
     }
     
+    broadcastState();
+  });
+  
+  // Photo: Start (show first photo and start timer)
+  socket.on('photoStart', () => {
+    if (gameState.phase !== 'photo') return;
+    
+    gameState.photoPhase = 'showing';
+    gameState.currentPhotoIndex = 0;
+    startPhotoTimer();
+    broadcastState();
+  });
+  
+  // Photo: Skip (next photo without correct answer)
+  socket.on('photoSkip', () => {
+    if (gameState.phase !== 'photo' || gameState.photoPhase !== 'showing') return;
+    
+    gameState.currentPhotoIndex++;
+    
+    // If we've seen all 6 photos
+    if (gameState.currentPhotoIndex >= 6 || gameState.currentPhotoIndex >= gameState.currentPhotoSet.photos.length) {
+      stopTimer();
+      // Move to adding phase - next player can add
+      gameState.photoAddingPlayerIndex = gameState.photoPlayerIndex;
+      const nextAdder = getNextPhotoAddingPlayer();
+      if (nextAdder !== null) {
+        gameState.photoAddingPlayerIndex = nextAdder;
+        gameState.photoActivePlayer = gameState.participants[nextAdder];
+        gameState.photoPhase = 'adding';
+        gameState.currentPhotoIndex = 0; // Reset to first unanswered photo
+      } else {
+        gameState.photoPhase = 'recap';
+      }
+    }
+    
+    broadcastState();
+  });
+  
+  // Photo: Correct answer
+  socket.on('photoCorrect', () => {
+    if (gameState.phase !== 'photo') return;
+    if (gameState.photoPhase !== 'showing' && gameState.photoPhase !== 'adding') return;
+    
+    // Mark current photo as answered
+    if (!gameState.photoAnswersFound.includes(gameState.currentPhotoIndex)) {
+      gameState.photoAnswersFound.push(gameState.currentPhotoIndex);
+      
+      // Award 20 seconds to active player
+      const player = gameState.photoActivePlayer;
+      if (player && gameState.scores[player] !== undefined) {
+        gameState.scores[player] += 20;
+      }
+    }
+    
+    if (gameState.photoPhase === 'showing') {
+      // Main player - move to next photo
+      gameState.currentPhotoIndex++;
+      
+      // If we've seen all 6 photos
+      if (gameState.currentPhotoIndex >= 6 || gameState.currentPhotoIndex >= gameState.currentPhotoSet.photos.length) {
+        stopTimer();
+        // Move to adding phase
+        gameState.photoAddingPlayerIndex = gameState.photoPlayerIndex;
+        const nextAdder = getNextPhotoAddingPlayer();
+        if (nextAdder !== null && gameState.photoAnswersFound.length < 6) {
+          gameState.photoAddingPlayerIndex = nextAdder;
+          gameState.photoActivePlayer = gameState.participants[nextAdder];
+          gameState.photoPhase = 'adding';
+          gameState.currentPhotoIndex = 0;
+        } else {
+          gameState.photoPhase = 'recap';
+        }
+      }
+    } else if (gameState.photoPhase === 'adding') {
+      // Adding player got it - find next unanswered photo for this player
+      let foundUnanswered = false;
+      for (let i = gameState.currentPhotoIndex + 1; i < gameState.currentPhotoSet.photos.length; i++) {
+        if (!gameState.photoAnswersFound.includes(i)) {
+          gameState.currentPhotoIndex = i;
+          foundUnanswered = true;
+          break;
+        }
+      }
+      
+      // All answered or this player is done
+      if (!foundUnanswered || gameState.photoAnswersFound.length >= 6) {
+        gameState.photoPhase = 'recap';
+      }
+    }
+    
+    broadcastState();
+  });
+  
+  // Photo: Adding player passes (next adder or recap)
+  socket.on('photoAddingPass', () => {
+    if (gameState.phase !== 'photo' || gameState.photoPhase !== 'adding') return;
+    
+    const nextAdder = getNextPhotoAddingPlayer();
+    if (nextAdder !== null && gameState.photoAnswersFound.length < gameState.currentPhotoSet.photos.length) {
+      gameState.photoAddingPlayerIndex = nextAdder;
+      gameState.photoActivePlayer = gameState.participants[nextAdder];
+      gameState.currentPhotoIndex = 0;
+      // Find first unanswered
+      for (let i = 0; i < gameState.currentPhotoSet.photos.length; i++) {
+        if (!gameState.photoAnswersFound.includes(i)) {
+          gameState.currentPhotoIndex = i;
+          break;
+        }
+      }
+    } else {
+      gameState.photoPhase = 'recap';
+    }
+    
+    broadcastState();
+  });
+  
+  // Photo: Next photo set (after recap)
+  socket.on('photoNextSet', () => {
+    if (gameState.phase !== 'photo') return;
+    
+    stopTimer();
+    gameState.currentPhotoSetIndex++;
+    gameState.photoPlayerIndex = (gameState.photoPlayerIndex + 1) % gameState.participants.length;
+    
+    if (gameState.currentPhotoSetIndex >= photoSets.length) {
+      // Go to finale
+      gameState.phase = 'round-intro';
+      gameState.currentRound = 'finale';
+    } else {
+      setupPhotoSet();
+    }
+    
+    broadcastState();
+  });
+  
+  // Photo: Go to recap
+  socket.on('photoShowRecap', () => {
+    if (gameState.phase !== 'photo') return;
+    stopTimer();
+    gameState.photoPhase = 'recap';
+    broadcastState();
+  });
+  
+  // Start photo round manually
+  socket.on('startPhotoRound', () => {
+    gameState.phase = 'round-intro';
+    gameState.currentRound = 'photo';
     broadcastState();
   });
   
@@ -986,88 +1069,6 @@ io.on('connection', (socket) => {
     broadcastState();
   });
   
-  // Photo round: Select player and start
-  socket.on('photoSelectPlayer', (playerName) => {
-    if (gameState.phase !== 'photos' || gameState.photoPhase !== 'select') return;
-    
-    gameState.photoActivePlayer = playerName;
-    gameState.currentPhotoIndex = 0;
-    gameState.photoCorrectAnswers = [];
-    gameState.photoSkippedAnswers = [];
-    gameState.photoPhase = 'playing';
-    startPhotoTimer();
-    
-    broadcastState();
-  });
-  
-  // Photo round: Correct answer
-  socket.on('photoCorrect', () => {
-    if (gameState.phase !== 'photos') return;
-    
-    if (gameState.photoPhase === 'playing') {
-      // Main player got it correct
-      gameState.photoCorrectAnswers.push(gameState.currentPhotoIndex);
-      nextPhoto();
-    } else if (gameState.photoPhase === 'supplement') {
-      // Supplement player got it correct - mark the currently shown skipped photo
-      // Find first unanswered skipped photo
-      const skipped = gameState.photoSkippedAnswers.filter(
-        idx => !gameState.photoCorrectAnswers.includes(idx)
-      );
-      if (skipped.length > 0) {
-        gameState.photoCorrectAnswers.push(skipped[0]);
-        gameState.photoSkippedAnswers = gameState.photoSkippedAnswers.filter(idx => idx !== skipped[0]);
-      }
-    }
-    
-    broadcastState();
-  });
-  
-  // Photo round: Skip photo
-  socket.on('photoSkip', () => {
-    if (gameState.phase !== 'photos' || gameState.photoPhase !== 'playing') return;
-    
-    gameState.photoSkippedAnswers.push(gameState.currentPhotoIndex);
-    nextPhoto();
-    
-    broadcastState();
-  });
-  
-  // Photo round: Next supplement player
-  socket.on('photoNextSupplement', () => {
-    if (gameState.phase !== 'photos' || gameState.photoPhase !== 'supplement') return;
-    
-    gameState.photoSupplementIndex++;
-    setupNextSupplementPlayer();
-    
-    broadcastState();
-  });
-  
-  // Photo round: Show review (all photos)
-  socket.on('photoShowReview', () => {
-    if (gameState.phase !== 'photos') return;
-    
-    gameState.photoPhase = 'review';
-    
-    broadcastState();
-  });
-  
-  // Photo round: Next player
-  socket.on('photoNextPlayer', () => {
-    if (gameState.phase !== 'photos') return;
-    
-    nextPhotoPlayer();
-    
-    broadcastState();
-  });
-  
-  // Start photo round manually
-  socket.on('startPhotoRound', () => {
-    gameState.phase = 'round-intro';
-    gameState.currentRound = 'photos';
-    broadcastState();
-  });
-  
   // Reset game
   socket.on('resetGame', () => {
     resetGame();
@@ -1093,9 +1094,11 @@ function broadcastState() {
     };
   }
   
-  // Photo round data
-  const currentPhotoSet = getCurrentPhotoSet();
-  const currentPhoto = getCurrentPhoto();
+  // Get current photo if in photo round
+  let currentPhoto = null;
+  if (gameState.currentPhotoSet && gameState.currentPhotoIndex < gameState.currentPhotoSet.photos.length) {
+    currentPhoto = gameState.currentPhotoSet.photos[gameState.currentPhotoIndex];
+  }
   
   io.emit('gameState', {
     ...gameState,
@@ -1111,10 +1114,8 @@ function broadcastState() {
     currentWavelengthPair: currentPair,
     totalWavelengthRounds: gameState.wavelengthPairs.length,
     totalFinaleTopics: finaleTopics.length,
-    // Photo round data
-    currentPhotoSet: currentPhotoSet,
-    currentPhoto: currentPhoto,
-    totalPhotoSets: photoSets.length
+    totalPhotoSets: photoSets.length,
+    currentPhoto: currentPhoto
   });
 }
 

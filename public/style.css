@@ -2773,11 +2773,7 @@ body {
   background: var(--text-muted);
 }
 
-/* ========================================
-   PHOTO ROUND STYLES
-   ======================================== */
-
-/* === Photo Screen (Participant) === */
+/* === Photo Round - Participant Screen === */
 .photo-header {
   text-align: center;
   padding: 1.5rem;
@@ -2785,15 +2781,22 @@ body {
 
 .photo-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 3.5rem;
-  background: linear-gradient(135deg, #ec4899, #f97316);
+  font-size: 4rem;
+  background: linear-gradient(135deg, #ec4899, #f472b6, #ec4899);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-shadow: 0 0 40px rgba(236, 72, 153, 0.5);
+  animation: photoGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes photoGlow {
+  0% { filter: drop-shadow(0 0 15px rgba(236, 72, 153, 0.4)); }
+  100% { filter: drop-shadow(0 0 30px rgba(236, 72, 153, 0.6)); }
 }
 
 .photo-counter {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: var(--text-secondary);
 }
 
@@ -2802,30 +2805,29 @@ body {
   font-weight: 700;
 }
 
-/* === Photo Player Section === */
 .photo-player-section {
-  text-align: center;
-  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
 }
 
 .photo-player-display {
-  display: inline-block;
   background: var(--bg-card);
   border: 3px solid #ec4899;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   padding: 1.5rem 3rem;
-  box-shadow: 0 0 40px rgba(236, 72, 153, 0.4);
-  transition: all 0.3s ease;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
 }
 
 .photo-player-display.warning {
   border-color: var(--accent-warning);
-  box-shadow: 0 0 40px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.4);
 }
 
 .photo-player-display.danger {
   border-color: var(--accent-danger);
-  box-shadow: 0 0 40px rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
   animation: timerPulse 0.5s ease-in-out infinite;
 }
 
@@ -2833,178 +2835,148 @@ body {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2rem;
   color: #ec4899;
-  letter-spacing: 0.05em;
-}
-
-.photo-player-display.warning .photo-player-name {
-  color: var(--accent-warning);
-}
-
-.photo-player-display.danger .photo-player-name {
-  color: var(--accent-danger);
 }
 
 .photo-player-time {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 5rem;
+  font-size: 4rem;
   line-height: 1;
-  color: var(--text-primary);
 }
 
 .photo-player-label {
-  font-size: 1rem;
-  color: var(--text-secondary);
+  font-size: 0.85rem;
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.2em;
 }
 
-/* === Photo Display Area === */
-.photo-display-area {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+.photo-theme-display {
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 1.5rem;
+}
+
+.theme-label {
+  color: var(--text-muted);
+  margin-right: 0.5rem;
+}
+
+.theme-text {
+  color: #ec4899;
+  font-weight: 700;
 }
 
 .photo-container {
-  max-width: 900px;
-  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.photo-waiting {
+  padding: 4rem;
   background: var(--bg-card);
-  border-radius: 1.5rem;
-  overflow: hidden;
-  border: 3px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
 }
 
-.photo-container.waiting {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 400px;
+.photo-waiting .waiting-text {
+  font-size: 1.5rem;
+  color: var(--text-muted);
 }
 
-.photo-container.waiting::before {
-  content: 'Wachten op speler...';
+.photo-image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.photo-image {
+  max-width: 100%;
+  max-height: 50vh;
+  border-radius: 1rem;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+}
+
+.photo-number {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+.photo-recap {
+  max-width: 1000px;
+  margin: 2rem auto;
+}
+
+.recap-title {
+  text-align: center;
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2rem;
-  color: var(--text-muted);
+  margin-bottom: 2rem;
+  color: #ec4899;
 }
 
-.quiz-photo {
-  width: 100%;
-  height: auto;
-  display: block;
-  max-height: 70vh;
-  object-fit: contain;
-}
-
-/* === Photo Phase Indicator === */
-.photo-phase-indicator {
-  text-align: center;
-  font-size: 1.25rem;
-  color: var(--text-secondary);
-  margin-top: 1rem;
-}
-
-/* === Photo Supplement Info === */
-.photo-supplement-info {
-  text-align: center;
-  padding: 1.5rem;
-  background: var(--bg-card);
-  border: 2px solid var(--accent-secondary);
-  border-radius: 1rem;
-  margin: 1rem auto;
-  max-width: 400px;
-}
-
-.supplement-label {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.5rem;
-}
-
-.supplement-player-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2.5rem;
-  color: var(--accent-secondary);
-}
-
-/* === Photo All Times === */
-.photo-all-times {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  background: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1rem;
-  padding: 1rem 1.5rem;
-  min-width: 180px;
-}
-
-/* === Review Grid === */
-.review-grid {
+.recap-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  padding: 1rem;
+  gap: 1.5rem;
 }
 
-.review-photo-item {
-  background: var(--bg-card-light);
+.recap-item {
+  background: var(--bg-card);
   border-radius: 0.75rem;
   overflow: hidden;
-  border: 3px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  transition: transform 0.2s;
 }
 
-.review-photo-item img {
+.recap-item img {
   width: 100%;
   height: 150px;
   object-fit: cover;
 }
 
-.review-answer {
+.recap-answer {
   padding: 0.75rem;
-  font-weight: 600;
   text-align: center;
-  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--bg-card-light);
 }
 
-.review-photo-item.correct {
-  border-color: var(--accent-success);
+.recap-item.found {
+  border: 3px solid var(--accent-success);
 }
 
-.review-photo-item.correct .review-answer {
+.recap-item.found .recap-answer {
   color: var(--accent-success);
 }
 
-.review-photo-item.missed {
-  border-color: var(--accent-danger);
+.recap-item.missed {
+  border: 3px solid var(--accent-danger);
   opacity: 0.7;
 }
 
-.review-photo-item.missed .review-answer {
+.recap-item.missed .recap-answer {
   color: var(--accent-danger);
 }
 
-.review-status {
-  padding: 0.5rem;
-  text-align: center;
-  font-size: 0.8rem;
-  font-weight: 600;
+.photo-scoreboard {
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  width: 250px;
 }
 
-/* === Presenter Photo Screen === */
+/* === Photo Round - Presenter Screen === */
 .presenter-photo .photo-presenter-layout {
   display: grid;
   grid-template-columns: 1fr 350px;
   gap: 2rem;
-  width: 100%;
   max-width: 1400px;
-  height: 90vh;
+  width: 100%;
+  align-items: start;
 }
 
 .photo-panel {
@@ -3012,278 +2984,184 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
   padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-}
-
-.photo-header-presenter {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
 }
 
 .photo-header-presenter h2 {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.5rem;
-  background: linear-gradient(135deg, #ec4899, #f97316);
+  background: linear-gradient(135deg, #ec4899, #f472b6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-}
-
-.photo-progress {
-  color: var(--text-secondary);
-}
-
-.photo-progress span {
-  color: #ec4899;
-  font-weight: 700;
-}
-
-/* === Player Selection === */
-.photo-select-section h3,
-.photo-supplement-section h3,
-.photo-review-section h3 {
-  font-size: 1rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
   margin-bottom: 1rem;
 }
 
-.player-select-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-}
-
-.btn-player-select {
-  background: var(--bg-card-light);
-  color: var(--text-primary);
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  padding: 1rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.btn-player-select:hover:not(:disabled) {
-  border-color: #ec4899;
-  color: #ec4899;
-  transform: translateY(-2px);
-}
-
-.btn-player-select.played {
-  background: rgba(16, 185, 129, 0.2);
-  border-color: var(--accent-success);
-  color: var(--accent-success);
-  cursor: not-allowed;
-}
-
-/* === Photo Active Card (Presenter) === */
-.photo-active-card {
-  background: var(--bg-card-light);
-  border: 3px solid #ec4899;
-  border-radius: 1rem;
-  padding: 1.5rem;
+.photo-theme-presenter {
   text-align: center;
   margin-bottom: 1rem;
-  box-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
-}
-
-.photo-active-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2rem;
-  color: #ec4899;
-}
-
-.photo-active-timer {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 4rem;
-  line-height: 1;
-  color: var(--text-primary);
-}
-
-.photo-active-timer.warning {
-  color: var(--accent-warning);
-}
-
-.photo-active-timer.danger {
-  color: var(--accent-danger);
-  animation: timerPulse 0.5s ease-in-out infinite;
-}
-
-.photo-counter-presenter {
-  text-align: center;
-  font-size: 1.25rem;
-  color: var(--text-secondary);
-  margin-bottom: 1rem;
-}
-
-.photo-counter-presenter span {
-  color: #ec4899;
-  font-weight: 700;
-}
-
-/* === Presenter Photo Container === */
-.presenter-photo-container {
-  margin-bottom: 1rem;
-  border-radius: 0.75rem;
-  overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.presenter-quiz-photo {
-  width: 100%;
-  height: auto;
-  max-height: 300px;
-  object-fit: contain;
-  display: block;
-}
-
-/* === Photo Answer Display === */
-.photo-answer-display {
+  padding: 0.75rem;
   background: var(--bg-card-light);
-  padding: 1rem;
-  border-radius: 0.75rem;
-  margin-bottom: 1rem;
-  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 0.5rem;
 }
 
-.photo-answer-text {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--accent-secondary);
-}
-
-/* === Photo Action Buttons === */
-.photo-action-buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+.photo-active-player-section {
   margin-bottom: 1.5rem;
 }
 
-/* === Supplement Section === */
-.supplement-player-card {
+.photo-active-player-card {
   background: var(--bg-card-light);
-  border: 2px solid var(--accent-secondary);
+  border: 3px solid #ec4899;
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.photo-active-player-card.warning {
+  border-color: var(--accent-warning);
+}
+
+.photo-active-player-card.danger {
+  border-color: var(--accent-danger);
+  animation: timerPulse 0.5s ease-in-out infinite;
+}
+
+.photo-presenter-preview {
+  margin-bottom: 1.5rem;
+}
+
+.photo-preview-container {
+  background: var(--bg-card-light);
   border-radius: 0.75rem;
-  padding: 1rem;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.supplement-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.75rem;
-  color: var(--accent-secondary);
-}
-
-.skipped-photos-section h4 {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-bottom: 0.75rem;
-}
-
-.skipped-photos-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.skipped-photo-item {
-  background: var(--bg-card-light);
-  border-radius: 0.5rem;
   overflow: hidden;
-  border: 2px solid var(--accent-warning);
+  margin-bottom: 1rem;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.skipped-photo-item img {
-  width: 100%;
-  height: 80px;
-  object-fit: cover;
-}
-
-.skipped-answer {
-  padding: 0.5rem;
-  font-size: 0.75rem;
-  text-align: center;
-  color: var(--accent-warning);
-  font-weight: 600;
-}
-
-.no-skipped {
+.photo-preview-waiting {
+  padding: 2rem;
   color: var(--text-muted);
-  font-style: italic;
-  text-align: center;
-  padding: 1rem;
 }
 
-.supplement-actions {
+.photo-preview-image {
+  position: relative;
+  width: 100%;
+}
+
+.photo-preview-image img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+}
+
+.photo-preview-number {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+}
+
+.photo-correct-answer {
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(244, 114, 182, 0.1));
+  border: 2px solid #ec4899;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.photo-correct-answer .answer-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.photo-correct-answer .answer-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ec4899;
+}
+
+.photo-actions {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-}
-
-/* === Review Section === */
-.review-photos-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
   margin-bottom: 1rem;
 }
 
-/* === Photo Control Panel === */
+.photo-actions .btn {
+  width: 100%;
+}
+
+.unanswered-section {
+  background: var(--bg-card-light);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.unanswered-section h3 {
+  font-size: 0.85rem;
+  color: var(--accent-danger);
+  margin-bottom: 0.75rem;
+}
+
+.unanswered-list {
+  list-style: none;
+}
+
+.unanswered-list li {
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+}
+
+.unanswered-list li:last-child {
+  border-bottom: none;
+}
+
 .photo-control-panel {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.photo-results-section {
+.photo-answered-section {
   background: var(--bg-card);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
-  padding: 1.25rem;
+  padding: 1rem;
 }
 
-.photo-results-section h3 {
+.photo-answered-section h3 {
   font-size: 0.85rem;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   margin-bottom: 0.75rem;
 }
 
-.photo-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.photo-answered-section h3 span {
+  color: var(--accent-success);
 }
 
-.stat-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+.photo-answered-list {
+  list-style: none;
 }
 
-.stat-item:last-child {
-  border-bottom: none;
+.photo-answered-list li {
+  padding: 0.5rem;
+  color: var(--accent-success);
 }
 
-.stat-label {
-  color: var(--text-secondary);
-}
-
-.stat-value {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.5rem;
-  color: var(--accent-primary);
+.photo-answered-list li.empty {
+  color: var(--text-muted);
 }
 

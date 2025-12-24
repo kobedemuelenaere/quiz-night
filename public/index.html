@@ -168,40 +168,46 @@
     <header class="photo-header">
       <h1 class="photo-title">📸 FOTORONDE</h1>
       <div class="photo-counter">
-        Foto <span id="photo-num">1</span>/6
+        Set <span id="photo-set-num">1</span>/<span id="photo-set-total">6</span>
       </div>
     </header>
 
     <!-- Active Player with Timer -->
     <section class="photo-player-section">
-      <div class="photo-player-display">
-        <div class="photo-player-name" id="photo-player-name">Speler</div>
+      <div class="photo-player-display" id="photo-player-display">
+        <div class="photo-player-name" id="photo-player-name">Player</div>
         <div class="photo-player-time" id="photo-player-time">60</div>
         <div class="photo-player-label">seconden</div>
       </div>
     </section>
 
-    <!-- Photo display area -->
-    <main class="photo-display-area">
-      <div class="photo-container" id="photo-container">
-        <img id="current-photo-img" src="" alt="Quiz foto" class="quiz-photo">
+    <!-- Theme display -->
+    <div class="photo-theme-display" id="photo-theme-display">
+      <span class="theme-label">Thema:</span>
+      <span class="theme-text" id="photo-theme">-</span>
+    </div>
+
+    <!-- Photo display -->
+    <div class="photo-container" id="photo-container">
+      <div class="photo-waiting" id="photo-waiting">
+        <div class="waiting-text">Wachten op start...</div>
       </div>
-    </main>
-
-    <!-- Phase indicator -->
-    <div class="photo-phase-indicator" id="photo-phase-indicator">
-      <!-- Will show current phase: playing, supplement, review -->
+      <div class="photo-image-wrapper hidden" id="photo-image-wrapper">
+        <img class="photo-image" id="photo-image" src="" alt="Foto">
+        <div class="photo-number" id="photo-number">1/6</div>
+      </div>
     </div>
 
-    <!-- Supplement info -->
-    <div class="photo-supplement-info hidden" id="photo-supplement-info">
-      <div class="supplement-label">AANVULLEN:</div>
-      <div class="supplement-player-name" id="supplement-player-name">-</div>
+    <!-- Recap display (all photos with answers) -->
+    <div class="photo-recap hidden" id="photo-recap">
+      <h2 class="recap-title">Alle antwoorden:</h2>
+      <div class="recap-grid" id="recap-grid"></div>
     </div>
 
-    <!-- All players time -->
-    <aside class="photo-all-times">
-      <ul id="photo-scoreboard-list" class="time-list"></ul>
+    <!-- Scoreboard -->
+    <aside class="scoreboard photo-scoreboard">
+      <h3 class="scoreboard-title">Scores</h3>
+      <ul id="photo-scoreboard-list" class="score-list"></ul>
     </aside>
   </div>
 

@@ -49,17 +49,6 @@ const puzzleGrid = document.getElementById('puzzle-grid');
 const solvedSolutions = document.getElementById('solved-solutions');
 const puzzleScoreboardList = document.getElementById('puzzle-scoreboard-list');
 
-// Photo elements
-const photoNum = document.getElementById('photo-num');
-const photoPlayerName = document.getElementById('photo-player-name');
-const photoPlayerTime = document.getElementById('photo-player-time');
-const currentPhotoImg = document.getElementById('current-photo-img');
-const photoContainer = document.getElementById('photo-container');
-const photoPhaseIndicator = document.getElementById('photo-phase-indicator');
-const photoSupplementInfo = document.getElementById('photo-supplement-info');
-const supplementPlayerName = document.getElementById('supplement-player-name');
-const photoScoreboardList = document.getElementById('photo-scoreboard-list');
-
 // Finished elements
 const finalScoreboard = document.getElementById('final-scoreboard');
 
@@ -75,7 +64,7 @@ socket.on('gameState', (state) => {
     updatePuzzleScreen(state);
   } else if (state.phase === 'wavelength') {
     updateWavelengthScreen(state);
-  } else if (state.phase === 'photos') {
+  } else if (state.phase === 'photo') {
     updatePhotoScreen(state);
   } else if (state.phase === 'finale') {
     updateFinaleScreen(state);
@@ -104,7 +93,7 @@ function updateScreen(phase) {
     if (puzzleScreen) puzzleScreen.classList.remove('hidden');
   } else if (phase === 'wavelength') {
     if (wavelengthScreen) wavelengthScreen.classList.remove('hidden');
-  } else if (phase === 'photos') {
+  } else if (phase === 'photo') {
     if (photoScreen) photoScreen.classList.remove('hidden');
   } else if (phase === 'finale') {
     if (finaleScreen) finaleScreen.classList.remove('hidden');
@@ -123,8 +112,106 @@ function updateRoundIntroScreen(state) {
     roundTitle.textContent = state.roundInfo.titleNL;
   }
   if (roundIcon) {
-    const icons = { questions: '🎯', puzzle: '🧩', wavelength: '📻', finale: '🏆' };
+    const icons = { questions: '🎯', puzzle: '🧩', wavelength: '📻', photo: '📸', finale: '🏆' };
     roundIcon.textContent = icons[state.currentRound] || '🎮';
+  }
+}
+
+function updatePhotoScreen(state) {
+  const photoSetNum = document.getElementById('photo-set-num');
+  const photoSetTotal = document.getElementById('photo-set-total');
+  const photoPlayerName = document.getElementById('photo-player-name');
+  const photoPlayerTime = document.getElementById('photo-player-time');
+  const photoPlayerDisplay = document.getElementById('photo-player-display');
+  const photoTheme = document.getElementById('photo-theme');
+  const photoWaiting = document.getElementById('photo-waiting');
+  const photoImageWrapper = document.getElementById('photo-image-wrapper');
+  const photoImage = document.getElementById('photo-image');
+  const photoNumber = document.getElementById('photo-number');
+  const photoRecap = document.getElementById('photo-recap');
+  const recapGrid = document.getElementById('recap-grid');
+  const photoScoreboardList = document.getElementById('photo-scoreboard-list');
+  
+  if (photoSetNum) photoSetNum.textContent = state.currentPhotoSetIndex + 1;
+  if (photoSetTotal) photoSetTotal.textContent = state.totalPhotoSets || 6;
+  
+  // Active player
+  if (photoPlayerName) photoPlayerName.textContent = state.photoActivePlayer || '-';
+  if (photoPlayerTime) {
+    const time = state.scores[state.photoActivePlayer] || 0;
+    photoPlayerTime.textContent = time;
+  }
+  
+  // Timer coloring
+  if (photoPlayerDisplay) {
+    const time = state.scores[state.photoActivePlayer] || 0;
+    photoPlayerDisplay.classList.remove('danger', 'warning');
+    if (time <= 10) {
+      photoPlayerDisplay.classList.add('danger');
+    } else if (time <= 30) {
+      photoPlayerDisplay.classList.add('warning');
+    }
+  }
+  
+  // Theme
+  if (photoTheme && state.currentPhotoSet) {
+    photoTheme.textContent = state.currentPhotoSet.theme;
+  }
+  
+  // Photo display based on phase
+  if (state.photoPhase === 'waiting') {
+    if (photoWaiting) photoWaiting.classList.remove('hidden');
+    if (photoImageWrapper) photoImageWrapper.classList.add('hidden');
+    if (photoRecap) photoRecap.classList.add('hidden');
+  } else if (state.photoPhase === 'showing' || state.photoPhase === 'adding') {
+    if (photoWaiting) photoWaiting.classList.add('hidden');
+    if (photoRecap) photoRecap.classList.add('hidden');
+    
+    // Show current photo (if not already answered in adding phase)
+    if (state.currentPhoto && photoImageWrapper && photoImage) {
+      // In adding phase, find first unanswered photo
+      if (state.photoPhase === 'adding') {
+        let photoToShow = null;
+        for (let i = 0; i < state.currentPhotoSet.photos.length; i++) {
+          if (!state.photoAnswersFound.includes(i)) {
+            photoToShow = state.currentPhotoSet.photos[i];
+            break;
+          }
+        }
+        if (photoToShow) {
+          photoImage.src = `/pictures/${photoToShow.file}`;
+          photoImageWrapper.classList.remove('hidden');
+        }
+      } else {
+        photoImage.src = `/pictures/${state.currentPhoto.file}`;
+        photoImageWrapper.classList.remove('hidden');
+      }
+      if (photoNumber) {
+        photoNumber.textContent = `${state.currentPhotoIndex + 1}/${state.currentPhotoSet.photos.length}`;
+      }
+    }
+  } else if (state.photoPhase === 'recap') {
+    if (photoWaiting) photoWaiting.classList.add('hidden');
+    if (photoImageWrapper) photoImageWrapper.classList.add('hidden');
+    if (photoRecap) photoRecap.classList.remove('hidden');
+    
+    // Show all photos with answers
+    if (recapGrid && state.currentPhotoSet) {
+      recapGrid.innerHTML = state.currentPhotoSet.photos.map((photo, idx) => {
+        const found = state.photoAnswersFound.includes(idx);
+        return `
+          <div class="recap-item ${found ? 'found' : 'missed'}">
+            <img src="/pictures/${photo.file}" alt="${photo.answer}">
+            <div class="recap-answer">${photo.answer}</div>
+          </div>
+        `;
+      }).join('');
+    }
+  }
+  
+  // Scoreboard
+  if (photoScoreboardList) {
+    updateScoreboard(state.scores, photoScoreboardList, false, true);
   }
 }
 
@@ -296,109 +383,6 @@ function updatePuzzleScreen(state) {
   // All players' time
   if (puzzleScoreboardList) {
     updateTimeList(state.scores, state.puzzleActivePlayer, puzzleScoreboardList);
-  }
-}
-
-function updatePhotoScreen(state) {
-  if (!photoScreen) return;
-  
-  // Update photo counter
-  if (photoNum) {
-    photoNum.textContent = state.currentPhotoIndex + 1;
-  }
-  
-  // Update player info
-  if (photoPlayerName) {
-    photoPlayerName.textContent = state.photoActivePlayer || 'Wachten...';
-  }
-  
-  if (photoPlayerTime && state.photoActivePlayer) {
-    const time = state.scores[state.photoActivePlayer] || 0;
-    photoPlayerTime.textContent = time;
-    
-    // Color based on time
-    const playerDisplay = document.querySelector('.photo-player-display');
-    if (playerDisplay) {
-      playerDisplay.classList.remove('danger', 'warning');
-      if (time <= 10) {
-        playerDisplay.classList.add('danger');
-      } else if (time <= 30) {
-        playerDisplay.classList.add('warning');
-      }
-    }
-  }
-  
-  // Update phase indicator
-  if (photoPhaseIndicator) {
-    const phases = {
-      'select': 'Wachten op selectie...',
-      'playing': `Foto ${state.currentPhotoIndex + 1}/6`,
-      'supplement': 'Aanvullen',
-      'review': 'Overzicht'
-    };
-    photoPhaseIndicator.textContent = phases[state.photoPhase] || '';
-  }
-  
-  // Show/hide supplement info
-  if (photoSupplementInfo) {
-    if (state.photoPhase === 'supplement' && state.photoSupplementPlayer) {
-      photoSupplementInfo.classList.remove('hidden');
-      if (supplementPlayerName) {
-        supplementPlayerName.textContent = state.photoSupplementPlayer;
-      }
-    } else {
-      photoSupplementInfo.classList.add('hidden');
-    }
-  }
-  
-  // Update photo display
-  if (currentPhotoImg && photoContainer) {
-    if (state.photoPhase === 'select') {
-      // Waiting for player selection
-      photoContainer.classList.add('waiting');
-      currentPhotoImg.src = '';
-      currentPhotoImg.alt = 'Wachten op speler...';
-    } else if (state.photoPhase === 'playing' && state.currentPhoto) {
-      // Show current photo
-      photoContainer.classList.remove('waiting');
-      currentPhotoImg.src = `/pictures/${state.currentPhoto.file}`;
-      currentPhotoImg.alt = 'Quiz foto';
-    } else if (state.photoPhase === 'supplement') {
-      // Show skipped photos during supplement
-      const skipped = state.photoSkippedAnswers.filter(
-        idx => !state.photoCorrectAnswers.includes(idx)
-      );
-      if (skipped.length > 0 && state.currentPhotoSet) {
-        const firstSkipped = state.currentPhotoSet.photos[skipped[0]];
-        if (firstSkipped) {
-          currentPhotoImg.src = `/pictures/${firstSkipped.file}`;
-          currentPhotoImg.alt = 'Open foto';
-        }
-      } else {
-        currentPhotoImg.src = '';
-        currentPhotoImg.alt = 'Geen open foto\'s meer';
-      }
-    } else if (state.photoPhase === 'review' && state.currentPhotoSet) {
-      // Show all photos in review
-      photoContainer.innerHTML = `
-        <div class="review-grid">
-          ${state.currentPhotoSet.photos.map((photo, idx) => {
-            const isCorrect = state.photoCorrectAnswers.includes(idx);
-            return `
-              <div class="review-photo-item ${isCorrect ? 'correct' : 'missed'}">
-                <img src="/pictures/${photo.file}" alt="${photo.answer}">
-                <div class="review-answer">${photo.answer}</div>
-              </div>
-            `;
-          }).join('')}
-        </div>
-      `;
-    }
-  }
-  
-  // Update scoreboard
-  if (photoScoreboardList) {
-    updateTimeList(state.scores, state.photoActivePlayer, photoScoreboardList);
   }
 }
 
