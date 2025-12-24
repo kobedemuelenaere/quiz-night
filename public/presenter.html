@@ -299,8 +299,8 @@
           </div>
         </div>
         
-        <!-- Action buttons -->
-        <div class="photo-actions">
+        <!-- Action buttons for showing phase -->
+        <div class="photo-actions" id="photo-showing-actions">
           <button id="photo-start-btn" class="btn btn-start">
             ▶️ START
           </button>
@@ -310,21 +310,27 @@
           <button id="photo-correct-btn" class="btn btn-correct hidden">
             ✓ CORRECT (+20 sec)
           </button>
-          <button id="photo-adding-pass-btn" class="btn btn-pass hidden">
+        </div>
+        
+        <!-- Clickable answers for adding phase -->
+        <div class="photo-adding-section hidden" id="photo-adding-section">
+          <h3>Klik op correct antwoord (+20 sec):</h3>
+          <div class="photo-adding-buttons" id="photo-adding-buttons">
+            <!-- Generated buttons -->
+          </div>
+          <button id="photo-adding-pass-btn" class="btn btn-pass">
             ⏭️ VOLGENDE PERSOON
           </button>
-          <button id="photo-recap-btn" class="btn btn-secondary hidden">
+        </div>
+        
+        <!-- Recap/Next buttons -->
+        <div class="photo-recap-actions hidden" id="photo-recap-actions">
+          <button id="photo-recap-btn" class="btn btn-secondary">
             👁️ TOON ALLE ANTWOORDEN
           </button>
           <button id="photo-next-set-btn" class="btn btn-primary hidden">
             Volgende Set →
           </button>
-        </div>
-        
-        <!-- Unanswered photos after main player turn -->
-        <div class="unanswered-section hidden" id="unanswered-section">
-          <h3>❌ Niet geraden:</h3>
-          <ul id="unanswered-list" class="unanswered-list"></ul>
         </div>
       </div>
       

@@ -620,13 +620,42 @@ function updatePhotoPresenterScreen(state) {
     }
   }
   
-  // Show/hide buttons based on phase
+  // Show/hide sections based on phase
+  const photoShowingActions = document.getElementById('photo-showing-actions');
+  const photoAddingSection = document.getElementById('photo-adding-section');
+  const photoRecapActions = document.getElementById('photo-recap-actions');
+  const photoAddingButtons = document.getElementById('photo-adding-buttons');
+  
+  if (photoShowingActions) {
+    photoShowingActions.classList.toggle('hidden', state.photoPhase === 'adding' || state.photoPhase === 'recap');
+  }
+  if (photoAddingSection) {
+    photoAddingSection.classList.toggle('hidden', state.photoPhase !== 'adding');
+  }
+  if (photoRecapActions) {
+    photoRecapActions.classList.toggle('hidden', state.photoPhase === 'waiting' || state.photoPhase === 'showing');
+  }
+  
+  // Buttons within showing phase
   if (photoStartBtn) photoStartBtn.classList.toggle('hidden', state.photoPhase !== 'waiting');
   if (photoSkipBtn) photoSkipBtn.classList.toggle('hidden', state.photoPhase !== 'showing');
-  if (photoCorrectBtn) photoCorrectBtn.classList.toggle('hidden', state.photoPhase !== 'showing' && state.photoPhase !== 'adding');
-  if (photoAddingPassBtn) photoAddingPassBtn.classList.toggle('hidden', state.photoPhase !== 'adding');
-  if (photoRecapBtn) photoRecapBtn.classList.toggle('hidden', state.photoPhase === 'waiting' || state.photoPhase === 'recap');
+  if (photoCorrectBtn) photoCorrectBtn.classList.toggle('hidden', state.photoPhase !== 'showing');
+  if (photoRecapBtn) photoRecapBtn.classList.toggle('hidden', state.photoPhase === 'recap');
   if (photoNextSetBtn) photoNextSetBtn.classList.toggle('hidden', state.photoPhase !== 'recap');
+  
+  // Generate adding buttons (clickable answers)
+  if (photoAddingButtons && state.currentPhotoSet && state.photoPhase === 'adding') {
+    const unanswered = state.currentPhotoSet.photos
+      .map((photo, idx) => ({ photo, idx }))
+      .filter(({ idx }) => !state.photoAnswersFound.includes(idx));
+    
+    photoAddingButtons.innerHTML = unanswered.map(({ photo, idx }) => `
+      <button class="btn photo-answer-btn" onclick="photoAddingCorrect(${idx})">
+        ${photo.answer}
+        <span class="answer-hint">+20 sec</span>
+      </button>
+    `).join('') || '<p class="all-found">Alle foto\'s geraden!</p>';
+  }
   
   // Photo preview
   if (state.photoPhase === 'waiting') {
@@ -826,7 +855,13 @@ function finaleCorrect(answerIndex) {
   socket.emit('finaleCorrect', answerIndex);
 }
 
+// Photo adding correct answer
+function photoAddingCorrect(photoIndex) {
+  socket.emit('photoAddingCorrect', photoIndex);
+}
+
 // Make functions available globally
 window.removeParticipant = removeParticipant;
 window.solveSolution = solveSolution;
 window.finaleCorrect = finaleCorrect;
+window.photoAddingCorrect = photoAddingCorrect;

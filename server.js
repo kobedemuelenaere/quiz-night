@@ -932,6 +932,29 @@ io.on('connection', (socket) => {
     broadcastState();
   });
   
+  // Photo: Adding player clicks specific answer button
+  socket.on('photoAddingCorrect', (photoIndex) => {
+    if (gameState.phase !== 'photo' || gameState.photoPhase !== 'adding') return;
+    
+    // Mark this photo as answered
+    if (!gameState.photoAnswersFound.includes(photoIndex)) {
+      gameState.photoAnswersFound.push(photoIndex);
+      
+      // Award 20 seconds to active player
+      const player = gameState.photoActivePlayer;
+      if (player && gameState.scores[player] !== undefined) {
+        gameState.scores[player] += 20;
+      }
+    }
+    
+    // Check if all answered
+    if (gameState.photoAnswersFound.length >= gameState.currentPhotoSet.photos.length) {
+      gameState.photoPhase = 'recap';
+    }
+    
+    broadcastState();
+  });
+  
   // Photo: Adding player passes (next adder or recap)
   socket.on('photoAddingPass', () => {
     if (gameState.phase !== 'photo' || gameState.photoPhase !== 'adding') return;
@@ -940,14 +963,6 @@ io.on('connection', (socket) => {
     if (nextAdder !== null && gameState.photoAnswersFound.length < gameState.currentPhotoSet.photos.length) {
       gameState.photoAddingPlayerIndex = nextAdder;
       gameState.photoActivePlayer = gameState.participants[nextAdder];
-      gameState.currentPhotoIndex = 0;
-      // Find first unanswered
-      for (let i = 0; i < gameState.currentPhotoSet.photos.length; i++) {
-        if (!gameState.photoAnswersFound.includes(i)) {
-          gameState.currentPhotoIndex = i;
-          break;
-        }
-      }
     } else {
       gameState.photoPhase = 'recap';
     }

@@ -153,43 +153,31 @@ function updatePhotoScreen(state) {
     }
   }
   
-  // Theme
-  if (photoTheme && state.currentPhotoSet) {
-    photoTheme.textContent = state.currentPhotoSet.theme;
-  }
-  
   // Photo display based on phase
   if (state.photoPhase === 'waiting') {
     if (photoWaiting) photoWaiting.classList.remove('hidden');
     if (photoImageWrapper) photoImageWrapper.classList.add('hidden');
     if (photoRecap) photoRecap.classList.add('hidden');
-  } else if (state.photoPhase === 'showing' || state.photoPhase === 'adding') {
+  } else if (state.photoPhase === 'showing') {
     if (photoWaiting) photoWaiting.classList.add('hidden');
     if (photoRecap) photoRecap.classList.add('hidden');
     
-    // Show current photo (if not already answered in adding phase)
+    // Show current photo during main player's turn
     if (state.currentPhoto && photoImageWrapper && photoImage) {
-      // In adding phase, find first unanswered photo
-      if (state.photoPhase === 'adding') {
-        let photoToShow = null;
-        for (let i = 0; i < state.currentPhotoSet.photos.length; i++) {
-          if (!state.photoAnswersFound.includes(i)) {
-            photoToShow = state.currentPhotoSet.photos[i];
-            break;
-          }
-        }
-        if (photoToShow) {
-          photoImage.src = `/pictures/${photoToShow.file}`;
-          photoImageWrapper.classList.remove('hidden');
-        }
-      } else {
-        photoImage.src = `/pictures/${state.currentPhoto.file}`;
-        photoImageWrapper.classList.remove('hidden');
-      }
+      photoImage.src = `/pictures/${state.currentPhoto.file}`;
+      photoImageWrapper.classList.remove('hidden');
       if (photoNumber) {
         photoNumber.textContent = `${state.currentPhotoIndex + 1}/${state.currentPhotoSet.photos.length}`;
       }
     }
+  } else if (state.photoPhase === 'adding') {
+    // During adding phase: don't show photos, just show who's turn it is
+    if (photoWaiting) {
+      photoWaiting.classList.remove('hidden');
+      photoWaiting.innerHTML = '<div class="waiting-text">Aanvullen...</div>';
+    }
+    if (photoImageWrapper) photoImageWrapper.classList.add('hidden');
+    if (photoRecap) photoRecap.classList.add('hidden');
   } else if (state.photoPhase === 'recap') {
     if (photoWaiting) photoWaiting.classList.add('hidden');
     if (photoImageWrapper) photoImageWrapper.classList.add('hidden');
